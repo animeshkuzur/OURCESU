@@ -58,7 +58,7 @@
 				<br><br>
 				<div class="row">
 						<div class="foot">
-						<div class="col-sm-12">Developed by <a href="#" target="_blank">TNine Infotech</a></div>
+						<div class="col-sm-12">Developed by <a href="http://tnine.io" target="_blank">TNine Infotech</a></div>
 						</div>
 					</div>	
 			</div>
