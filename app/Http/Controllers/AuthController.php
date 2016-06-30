@@ -103,7 +103,7 @@ class AuthController extends Controller
     }
 
     public function registervalidate(Request $request){
-
+        
     }
 }
 

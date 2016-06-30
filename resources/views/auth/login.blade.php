@@ -33,7 +33,8 @@
 					<div class="or">
 						<h4><span>OR</span></h4>
 					</div>
-					<a class="btn btn-danger btn-block" href="/register" role="button">SIGN UP</a>
+					<!--<a class="btn btn-danger btn-block" href="/register" role="button">SIGN UP</a>-->
+					{!! Html::linkRoute('register', 'SIGN UP', array(), array('class' => 'btn btn-danger btn-block','role'=>'button')) !!}
 					<br><br>
 					<div class="row">
 						<div class="foot">
