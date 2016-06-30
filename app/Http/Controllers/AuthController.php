@@ -98,5 +98,12 @@ class AuthController extends Controller
             return back()->withInput();
     }
     
+    public function register(){
+        return view('auth.register');
+    }
+
+    public function registervalidate(Request $request){
+
+    }
 }
 

@@ -1,13 +1,15 @@
 @extends('layout.master')
 
-@section('content')
+@section('style')
+	<link rel="stylesheet" href="{{ URL::asset('style/login.css') }}">
+@endsection
 
+@section('content')
 		<!----------Content---------->
 		<div class="container">
 		<div class="row">
 			<div class="col-md-8 content">
-				<!--<h1>&nbsp;Managing your Electricity Bill...</h1>
-				<h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...have never been this easy!</h1>-->
+				
 			</div>
 
 			<!----------login Panel---------->
@@ -18,7 +20,7 @@
 				{!! Form::open(array('route' => 'loginvalidate','method'=>'POST')) !!}
 					{!! Form::text('email', null, array('class' => 'form-control','placeholder'=>'Username')) !!}
 					<br>
-					{!! Form::password('password', array('class' => 'form-control','placeholder'=>'Username')) !!}	
+					{!! Form::password('password', array('class' => 'form-control','placeholder'=>'Password')) !!}	
 					<div class="checkbox">
   						<label><input type="checkbox" value="">Remember Me</label>
   						<br>
@@ -31,7 +33,7 @@
 					<div class="or">
 						<h4><span>OR</span></h4>
 					</div>
-					<button class="btn btn-danger btn-block">SIGN UP</button>
+					<a class="btn btn-danger btn-block" href="/register" role="button">SIGN UP</a>
 					<br><br>
 					<div class="row">
 						<div class="foot">
