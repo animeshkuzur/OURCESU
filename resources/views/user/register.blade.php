@@ -14,7 +14,7 @@
 			<div class="register-panel">
 				<h3>Register</h3>
 				<hr>
-				{!! Form::open(array('route' => 'user.store')) !!}
+				{!! Form::open(array('route' => 'user.create')) !!}
 					<div class="row">
 						<div class="col-md-6">
 							{!! Form::text('fname', null, array('class' => 'form-control','placeholder'=>'First Name')) !!}

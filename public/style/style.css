@@ -2,6 +2,7 @@ body{
 	background:#f8f8f8;
 }
 .navbar-brand {
+	/*margin-top: -10px;*/
 	min-height: 100px;
 }
 .navbar-default{

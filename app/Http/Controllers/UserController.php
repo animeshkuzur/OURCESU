@@ -6,9 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use Tymon\JWTAuth\Facades\JWTAuth;
 
-class AuthController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +26,7 @@ class AuthController extends Controller
      */
     public function create()
     {
-        //
+        return view('user.register');
     }
 
     /**
@@ -86,21 +85,15 @@ class AuthController extends Controller
         //
     }
 
-    public function login(){
-        return view('auth.login');
+    public function dashboard(){
+        return view('user.dashboard');
     }
 
-    public function loginvalidate(Request $request){
-        $data = $request->only('email','password');
-        if(\Auth::attempt($data))
-            return redirect()->intended('dashboard');
-        else
-            return back()->withInput();
+    public function register(){
+        return view('auth.register');
     }
 
-    public function logout(){
-        \Auth::logout();
-        return redirect()->route('login');
+    public function registervalidate(Request $request){
+        
     }
 }
-

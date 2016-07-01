@@ -3,7 +3,7 @@
 @section('style')
 	<link rel="stylesheet" href="{{ URL::asset('style/login.css') }}">
 @endsection
-
+@include('include.header')
 @section('content')
 		<!----------Content---------->
 		<div class="container">
@@ -34,7 +34,7 @@
 						<h4><span>OR</span></h4>
 					</div>
 					<!--<a class="btn btn-danger btn-block" href="/register" role="button">SIGN UP</a>-->
-					{!! Html::linkRoute('register', 'SIGN UP', array(), array('class' => 'btn btn-danger btn-block','role'=>'button')) !!}
+					{!! Html::linkRoute('user.create', 'SIGN UP', array(), array('class' => 'btn btn-danger btn-block','role'=>'button')) !!}
 					<br><br>
 					<div class="row">
 						<div class="foot">

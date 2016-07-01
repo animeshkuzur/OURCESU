@@ -5,7 +5,6 @@
 	@yield('style')
 	</head>
 	<body>
-		@include('include.header')
 		@yield('content')
 	</body>
 </html>

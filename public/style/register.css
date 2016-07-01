@@ -19,6 +19,7 @@ body{
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
 	padding: 10px 25px 25px 25px;
+	margin-bottom: 20px;
 }
 .btn-primary{
 	background-color: #131f53;
@@ -28,4 +29,7 @@ body{
 	text-align: center;
 	font-size: 12px;
 	color: #d0d0d0;
+}
+.col-md-6{
+	margin-top: 5px;
 }
