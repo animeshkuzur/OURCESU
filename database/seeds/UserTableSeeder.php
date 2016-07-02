@@ -17,7 +17,8 @@ class UserTableSeeder extends Seeder
         	'name'=>'Animesh',
         	'email'=>'animesh.kuzur@outlook.com',
         	'password'=>bcrypt('animesh'),
-        	'CONT_ACC'=>'12345678'
+        	'CONT_ACC'=>'12345678',
         ]);
+ 
     }
 }

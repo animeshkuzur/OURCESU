@@ -141,7 +141,7 @@
 	border: 1px solid #d5d5d5;
 
 }
-.navbar .navbar-default{
-    padding: 0px;
-    margin:0px;
+.navbar-default > .container{
+    padding:0px;
+    margin-top:-20px;
 }

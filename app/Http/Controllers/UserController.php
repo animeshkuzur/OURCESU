@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\User;
 
 class UserController extends Controller
 {
@@ -37,7 +38,26 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data=$request->only('name','lname','email','password','CONT_ACC');
+        $data['password'] = bcrypt($data['password']);
+        /*$user = User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => $data['password'],
+            'CONT_ACC' => $data['CONT_ACC'],
+            ]);*/
+        $user=\DB::table('users')->insert([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => $data['password'],
+            'CONT_ACC' => $data['CONT_ACC'],
+            'updated_at' => \Carbon\Carbon::now(),
+            'created_at'=>\Carbon\Carbon::now(),
+            ]);
+        if($user){
+            return redirect()->route('login');
+        }
+        return back()->withInput();
     }
 
     /**
@@ -89,11 +109,26 @@ class UserController extends Controller
         return view('user.dashboard');
     }
 
-    public function register(){
-        return view('auth.register');
-    }
+    public function apiregister(Request $request){
+            $data=$request->only('name','lname','email','password','CONT_ACC');
+            $data['password'] = bcrypt($data['password']);
+        try{
+            $user=\DB::table('users')->insert([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => $data['password'],
+                'CONT_ACC' => $data['CONT_ACC'],
+                'updated_at' => \Carbon\Carbon::now(),
+                'created_at'=>\Carbon\Carbon::now(),
+                ]);
 
-    public function registervalidate(Request $request){
-        
+            if($user){
+                return response()->json(['Info' => 'user_registered'], 200);
+            }
+            return response()->json(['errorInfo' => 'credentials_exists'], 401);
+        }
+        catch(\Illuminate\Database\QueryException $ex){
+            return response()->json($ex);
+        }
     }
 }

@@ -10,11 +10,11 @@
 		<!------Sidebar-wrapper------>
 		<div id="sidebar-wrapper">
 			<ul class="sidebar-nav">
-				<li class="sidebar-brand"><a href="#">Hi {{ \Auth::user()->name }}!</a></li>
+				<li class="sidebar-brand"><a href="#">Hi &nbsp;{{ \Auth::user()->name }}&nbsp;!</a></li>
 				<li><a href="#">Metering</a></li>
 				<li><a href="#">Bills</a></li>
 				<li><a href="#">Compliance / Enforcement Lists</a></li>
-				<li><br></li>
+				<li></li>
 				<li><a href="#">Settings</a></li>
 				@if(\Auth::check())
 				<li>{!! Html::linkRoute('logout', 'Logout') !!}</li>

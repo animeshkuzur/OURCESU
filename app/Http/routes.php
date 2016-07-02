@@ -25,4 +25,5 @@ Route::get('/logout',['as'=>'logout','uses'=>'AuthController@logout']);
 
 Route::group(['prefix'=>'api'],function(){
 	Route::post('/login', ['uses'=>'ApiAuthController@apilogin']);
+	Route::post('/register',['uses'=>'UserController@apiregister']);
 });

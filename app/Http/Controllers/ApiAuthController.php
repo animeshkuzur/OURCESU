@@ -92,12 +92,12 @@ class ApiAuthController extends Controller
         try {
             // verify the credentials and create a token for the user
             if (! $token = JWTAuth::attempt($data)) {
-                return response()->json(['error' => 'invalid_credentials'], 401);
+                return response()->json(['errorInfo' => 'invalid_credentials'], 401);
             }
         } 
         catch (JWTException $e) {
             // something went wrong
-            return response()->json(['error' => 'could_not_create_token'], 500);
+            return response()->json(['errorInfo' => 'could_not_create_token'], 500);
         }
         $users = \DB::select('select * from users where email = :email',['email'=>$data['email']]);
         foreach ($users as $user) {

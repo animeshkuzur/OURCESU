@@ -14,10 +14,10 @@
 			<div class="register-panel">
 				<h3>Register</h3>
 				<hr>
-				{!! Form::open(array('route' => 'user.create')) !!}
+				{!! Form::open(array('route' => 'user.store')) !!}
 					<div class="row">
 						<div class="col-md-6">
-							{!! Form::text('fname', null, array('class' => 'form-control','placeholder'=>'First Name')) !!}
+							{!! Form::text('name', null, array('class' => 'form-control','placeholder'=>'First Name')) !!}
 						</div>
 						<div class="col-md-6">
 							{!! Form::text('lname', null, array('class' => 'form-control','placeholder'=>'Last Name')) !!}
@@ -32,7 +32,7 @@
 					<br>					
 					<div class="row">
 						<div class="col-md-6">
-							{!! Form::password('password1', array('class' => 'form-control','placeholder'=>'Password')) !!}
+							{!! Form::password('password', array('class' => 'form-control','placeholder'=>'Password')) !!}
 						</div>
 						<div class="col-md-6">
 							{!! Form::password('password2', array('class' => 'form-control','placeholder'=>'Confirm Password')) !!}
@@ -41,7 +41,7 @@
 					<br>
 					<div class="row">
 						<div class="col-md-6">
-							{!! Form::text('cont_acc', null, array('class' => 'form-control','placeholder'=>'CONTRACT ACCOUNT NUMBER')) !!}
+							{!! Form::text('CONT_ACC', null, array('class' => 'form-control','placeholder'=>'CONTRACT ACCOUNT NUMBER')) !!}
 						</div>
 						<div class="col-md-6">
 						</div>
