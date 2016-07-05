@@ -18,7 +18,7 @@
 				<h3>Login</h3>
 				<hr>
 				{!! Form::open(array('route' => 'loginvalidate','method'=>'POST')) !!}
-					{!! Form::text('email', null, array('class' => 'form-control','placeholder'=>'Username')) !!}
+					{!! Form::text('email', null, array('class' => 'form-control','placeholder'=>'Email')) !!}
 					<br>
 					{!! Form::password('password', array('class' => 'form-control','placeholder'=>'Password')) !!}	
 					<div class="checkbox">
@@ -27,7 +27,7 @@
 					</div>
 					{!! Form::submit(null, array('class' => 'btn btn-primary btn-block','value'=>'LOGIN')) !!}
 					<br>
-					<label><a href="">Forgot your password?</a></label>
+					<label>{!! Html::linkRoute('forgot', 'Forgot your password?') !!}</label>
 					<br>
 					<br>
 					<div class="or">

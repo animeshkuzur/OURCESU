@@ -114,4 +114,54 @@ class ApiAuthController extends Controller
 
     }
 
+    public function apiauthenticatedUser()
+    {
+        try {
+            if (!$user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['errorInfo' => 'user_not_found'], 404);
+            }
+        } catch (\Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
+            return response()->json(['errorInfo' => 'token_expired'], $e->getStatusCode());
+        } catch (\Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
+            return response()->json(['errorInfo' => 'token_invalid'], $e->getStatusCode());
+        } catch (\Tymon\JWTAuth\Exceptions\JWTException $e) {
+            return response()->json(['errorInfo' => 'token_absent'], $e->getStatusCode());
+        }
+        // the token is valid and we have found the user via the sub claim
+        return response()->json(compact('user'));
+    }
+
+    public function apilogout(Request $request)
+    {
+        try {
+        $this->validate($request, [
+            'token' => 'required'
+        ]);
+        JWTAuth::invalidate($request->input('token'));
+        return response()->json(['Info' => 'token_destroyed']);
+        }
+        catch (\Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
+            return response()->json(['errorInfo' => 'token_expired'], $e->getStatusCode());
+        } catch (\Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
+            return response()->json(['errorInfo' => 'token_invalid'], $e->getStatusCode());
+        } catch (\Tymon\JWTAuth\Exceptions\JWTException $e) {
+            return response()->json(['errorInfo' => 'token_absent'], $e->getStatusCode());
+        }
+    }
+
+    public function getToken()
+    {
+        $token = JWTAuth::getToken();
+        if (!$token) {
+            return response()->json(['errorInfo' => 'token_absent']);
+        }
+        try {
+            $refreshedToken = JWTAuth::refresh($token);
+            return response()->json(['token' => $refreshedToken]);
+        } catch (JWTException $e) {
+            return response()->json(['errorInfo' => 'Not able to refresh Token']);
+        }
+        
+    }
+
 }
