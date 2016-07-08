@@ -113,7 +113,7 @@ class UserController extends Controller
         if (\Auth::check()) {
             $user_cont_acc = \Auth::user()->CONT_ACC;
             $stl_conn = \DB::connection('sqlsrv_STL');
-            $data = $stl_conn->table('BILLING_OUTPUT_'.date('Y'))->where('CONTRACT_ACC', $user_cont_acc)->orderBy('BillMonth', 'desc')->get();
+            $data = $stl_conn->table('BILLING_OUTPUT_'.date('Y'))->where('CONTRACT_ACC', $user_cont_acc)->orderBy('BillMonth', 'asc')->get();
         }
         else{
             return redirect()->route('login');

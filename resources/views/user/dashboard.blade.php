@@ -38,9 +38,9 @@
                		</ul>
 				</li>
 				<li></li>
-				<li><a href="#">Settings</a></li>
+				<li><a href="#">Settings<span class="glyphicon glyphicon-cog"></span></a></li>
 				@if(\Auth::check())
-				<li>{!! Html::linkRoute('logout', 'Logout') !!}</li>
+				<li><a href="{{ url('/logout')}}">Logout<span class="glyphicon glyphicon-off"></span></a></li>
 				@else
 				<li>{!! Html::linkRoute('login', 'Login') !!}</li>
 				@endif
@@ -64,19 +64,28 @@
 						<div class="graph" id="graph"></div>
 					</div>
 					<div class="col-md-4">
+					<div class="row">
 						<div class="reading">
 							<div class="content">
 							<h4>Last Month's Reading</h4>
 							</div>
 							<hr>
 							@foreach($data as $dat)
-								@if ($loop->first)
-									<p>{{$dat->PRS_READ}}&nbsp;Units</p>
-								@endif
 							@endforeach
-							
-
+							<p><strong>{{$dat->UNITS_BILLED}}&nbsp;Units</strong></p>
 						</div>
+					</div>
+					<div class="row">
+						<div class="reading">
+							<div class="content">
+							<h4>Last Month's Bill</h4>
+							</div>
+							<hr>
+							@foreach($data as $dat)
+							@endforeach
+							<p><strong>₹&nbsp;{{$dat->CUR_BILL}}</strong></p>
+						</div>
+					</div>
 					</div>
 				</div>
 				<div class="row">
@@ -95,29 +104,39 @@
 			$("#wrapper").toggleClass("toggled");
 		});
 
-		$(document).ready(function() {
+		/*$(document).ready(function() {
     		barChart();
 
     		$(window).resize(function() {
         		window.m.redraw();
     		});
-		});
+		});*/
 
-		function barChart() {
+		//function barChart() {
 		window.m = Morris.Line({
         element: 'graph',
         data: [
         @foreach($data as $dat)
-        	{m: {{substr($dat->BillMonth,0,4)."-".substr($dat->BillMonth,4,2)}}, cost: {{$dat->CUR_BILL}} },
+        	
+        	{period: "{{substr($dat->BillMonth,0,4)."-".substr($dat->BillMonth,4,2)}}", cost: {{$dat->CUR_BILL}}, units: {{$dat->UNITS_BILLED}} },
+        
         @endforeach
         ],
-        xkey: 'm',
-        ykeys: ['cost'],
-        labels: [{{date('Y')-1}}, {{date('Y')}}],
+        xkey: 'period',
+        ykeys: ['cost','units'],
+        /*xLabelFormat: function(m) {
+          return m.getMonth()+'/'+m.getFullYear(); 
+          },*/
+        xLabels:'month',
+        /*dateFormat: function(m) {
+          d = new Date(m);
+          return d.getMonth()+'/'+d.getFullYear(); 
+          },*/
+        labels: ['cost','units'],
         hideHover: 'auto',
         resize: true,
-        redraw: true
+        //redraw: true
       });
-	}
+	//}
 	</script>
 @endsection

@@ -78,6 +78,7 @@
     height: 65px;
     font-size: 25px;
     line-height: 60px;
+
 }
 
 .sidebar-nav > .sidebar-brand a {
@@ -135,7 +136,7 @@
 .graph{
 	margin: 15px 0px 0px 0px;
 	padding: 5px;
-	height: 250px;
+	height: 255px;
 	background:white;
 	border-radius: 5px;
 	border: 1px solid #d5d5d5;
@@ -161,6 +162,18 @@
     transition: all 0.25s ease;
 }
 .glyphicon-chevron-down{
+    float:right;
+    display: inline-block;
+    margin-right: 20px;
+    margin-top:12px;
+}
+.glyphicon-cog{
+    float:right;
+    display: inline-block;
+    margin-right: 20px;
+    margin-top:12px;
+}
+.glyphicon-off{
     float:right;
     display: inline-block;
     margin-right: 20px;
