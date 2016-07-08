@@ -7,10 +7,10 @@
 @section('content')
 <div clas="container">
 	<div class="container">
-		<div class="col-md-8 content">
+		<div class="col-md-7 content">
 			
 		</div>
-		<div class="col-md-4">
+		<div class="col-md-5">
 			<div class="panel">
 				<h3>Enter your registered email.</h3>
 				<hr>

@@ -60,3 +60,7 @@ hr{
 	font-size: 12px;
 	color: #d0d0d0;
 }
+.alert .alert-danger{
+	padding: 0px;
+	margin: 0px;
+}

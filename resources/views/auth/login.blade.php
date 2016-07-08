@@ -17,6 +17,16 @@
 			<div class="login-panel">
 				<h3>Login</h3>
 				<hr>
+				@if($errors)
+				@if(count($errors))
+					@foreach($errors->all() as $error)	
+						<div class="alert alert-danger alert-dismissible" role="alert">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						{{ $error }}
+						</div>
+					@endforeach				
+				@endif
+				@endif
 				{!! Form::open(array('route' => 'loginvalidate','method'=>'POST')) !!}
 					{!! Form::text('email', null, array('class' => 'form-control','placeholder'=>'Email')) !!}
 					<br>

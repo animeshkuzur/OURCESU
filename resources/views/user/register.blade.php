@@ -14,6 +14,16 @@
 			<div class="register-panel">
 				<h3>Register</h3>
 				<hr>
+				@if($errors)
+				@if(count($errors))
+					@foreach($errors->all() as $error)	
+						<div class="alert alert-danger alert-dismissible" role="alert">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						{{ $error }}
+						</div>
+					@endforeach				
+				@endif
+				@endif
 				{!! Form::open(array('route' => 'user.store')) !!}
 					<div class="row">
 						<div class="col-md-6">
@@ -35,7 +45,7 @@
 							{!! Form::password('password', array('class' => 'form-control','placeholder'=>'Password')) !!}
 						</div>
 						<div class="col-md-6">
-							{!! Form::password('password2', array('class' => 'form-control','placeholder'=>'Confirm Password')) !!}
+							{!! Form::password('password_confirmation', array('class' => 'form-control','placeholder'=>'Confirm Password')) !!}
 						</div>
 					</div>
 					<br>

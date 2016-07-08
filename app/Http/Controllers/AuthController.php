@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use App\User;
 
 class AuthController extends Controller
 {
@@ -87,15 +88,19 @@ class AuthController extends Controller
     }
 
     public function login(){
+        if (\Auth::check()) {
+            return redirect()->route('dashboard');
+        }
         return view('auth.login');
     }
 
     public function loginvalidate(Request $request){
+        $this->validate($request, User::$login_validation_rules);
         $data = $request->only('email','password');
         if(\Auth::attempt($data))
             return redirect()->intended('dashboard');
         else
-            return back()->withInput();
+            return back()->withInput()->withErrors(['email' => 'Username or password is invalid']);
     }
 
     public function logout(){

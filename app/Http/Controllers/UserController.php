@@ -27,6 +27,9 @@ class UserController extends Controller
      */
     public function create()
     {
+        if (\Auth::check()) {
+            return redirect()->route('dashboard');
+        }
         return view('user.register');
     }
 
@@ -38,6 +41,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, User::$register_validation_rules);
         $data=$request->only('name','lname','email','password','CONT_ACC');
         $data['password'] = bcrypt($data['password']);
         /*$user = User::create([
@@ -106,7 +110,15 @@ class UserController extends Controller
     }
 
     public function dashboard(){
-        return view('user.dashboard');
+        if (\Auth::check()) {
+            $user_cont_acc = \Auth::user()->CONT_ACC;
+            $stl_conn = \DB::connection('sqlsrv_STL');
+            $data = $stl_conn->table('BILLING_OUTPUT_'.date('Y'))->where('CONTRACT_ACC', $user_cont_acc)->orderBy('BillMonth', 'desc')->get();
+        }
+        else{
+            return redirect()->route('login');
+        }
+        return view('user.dashboard',['data' => $data]);
     }
 
     public function apiregister(Request $request){

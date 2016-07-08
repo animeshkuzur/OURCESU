@@ -26,10 +26,11 @@ Route::get('/logout',['as'=>'logout','uses'=>'AuthController@logout']);
 Route::group(['prefix'=>'api'],function(){
 	Route::post('/login', ['uses'=>'ApiAuthController@apilogin']);
 	Route::post('/register',['uses'=>'UserController@apiregister']);
-	Route::post('/logout',['uses' => 'ApiAuthController@apilogout']);
-	Route::get('/getuser',['uses' => 'ApiAuthController@apiauthenticatedUser']);
-	Route::get('/gettoken',['uses' => 'ApiAuthController@getToken']);
+		Route::post('/logout',['uses' => 'ApiAuthController@apilogout']);
+		Route::get('/getuser',['uses' => 'ApiAuthController@apiauthenticatedUser']);
+		Route::get('/gettoken',['uses' => 'ApiAuthController@getToken']);
 });
+
 
 Route::get('/forgot',['as'=>'forgot','uses'=>'AuthController@forgot']);
 Route::post('/handleforgot',['as'=>'handleforgot', 'uses' => 'AuthController@handleforgot']);
