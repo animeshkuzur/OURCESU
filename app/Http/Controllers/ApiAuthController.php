@@ -115,11 +115,11 @@ class ApiAuthController extends Controller
                                 'email' => $email,
                                 'CONT_ACC' => $CONT_ACC,
                                 'phone' => $phone,
-                                'token' => $token,
                                 'CONS_ACC' => $cons_acc,
                                 'DivCode' => $divcode,
                                 'DIVISION' => $division,
                                 'METER_NO' => $meter_no,
+                                'token' => $token,
                                 ]);
 
     }
