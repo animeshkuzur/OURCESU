@@ -101,7 +101,7 @@ class ApiUserController extends Controller
         
         $user_cont_acc = $user->CONT_ACC;
         $stl_conn = \DB::connection('sqlsrv_STL');
-        $data = $stl_conn->table('BILLING_OUTPUT_'.date('Y'))->where('CONTRACT_ACC', $user_cont_acc)->orderBy('BILL_MONTH', 'asc')->get();
+        $data = $stl_conn->table('BILLING_OUTPUT_'.date('Y'))->where('CONTRACT_ACC', $user_cont_acc)->orderBy('BillMonth', 'asc')->get();
         return response()->json(['Info' => $data]);
     }
 
@@ -120,7 +120,7 @@ class ApiUserController extends Controller
         
         $user_cont_acc = $user->CONT_ACC;
         $stl_conn = \DB::connection('sqlsrv_SAP');
-        $data = $stl_conn->table('BILLING_DATA')->where('CONTRACT_ACC', $user_cont_acc)->orderBy('BillMonth', 'asc')->get();
+        $data = $stl_conn->table('BILLING_DATA')->where('CONTRACT_ACC', $user_cont_acc)->orderBy('BILL_MONTH', 'asc')->get();
         return response()->json(['Info' => $data]);
     }
 }
