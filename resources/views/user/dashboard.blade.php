@@ -6,7 +6,9 @@
 	<script src="{{ URL::asset('bootstrap/js/raphael-min.js') }}"></script>
 
 @endsection
-@include('include.dashboardheader')
+@section('header')
+	@include('include.dashboardheader')
+@endsection
 @section('content')
 	<div id="wrapper">
 		
@@ -65,6 +67,7 @@
 					</div>
 					<div class="col-md-4">
 					<div class="row">
+						<div class="col-md-12">
 						<div class="reading">
 							<div class="content">
 							<h4>Last Month's Reading</h4>
@@ -74,8 +77,10 @@
 							@endforeach
 							<p><strong>{{$dat->UNITS_BILLED}}&nbsp;Units</strong></p>
 						</div>
+						</div>
 					</div>
 					<div class="row">
+						<div class="col-md-12">
 						<div class="reading">
 							<div class="content">
 							<h4>Last Month's Bill</h4>
@@ -85,17 +90,35 @@
 							@endforeach
 							<p><strong>₹&nbsp;{{$dat->CUR_BILL}}</strong></p>
 						</div>
+						</div>
 					</div>
 					</div>
 				</div>
 				<div class="row">
-					
+				<div class="col-md-12">
+					<div class="notice">
+					<div class="alert alert-info alert-dismissible" role="alert">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<strong>Notice:</strong><br>
+						Manage all your bills from this dashboard! Make use of the dashboard widgets like "Cost/Consumption Graph" or "Info Tab" displaying the graph of all bill/units consumed this year and last month's bill/Units Consumed respectively.
+					</div>
+					</div>
 				</div>
+				</div>
+
+				<div class="row">
+				<div class="col-md-12">
+					<div class="reading" style="height: 50px;">
+					
+					</div>
+				</div>
+				</div>
+
 			</div>
 		</div>
 	</div>
 
-	<!----Menu Toggle Script---->
+	<!----Menu Toggle Script and Graph---->
 	<script>
 
 
@@ -104,39 +127,19 @@
 			$("#wrapper").toggleClass("toggled");
 		});
 
-		/*$(document).ready(function() {
-    		barChart();
-
-    		$(window).resize(function() {
-        		window.m.redraw();
-    		});
-		});*/
-
-		//function barChart() {
 		window.m = Morris.Line({
         element: 'graph',
         data: [
         @foreach($data as $dat)
-        	
         	{period: "{{substr($dat->BillMonth,0,4)."-".substr($dat->BillMonth,4,2)}}", cost: {{$dat->CUR_BILL}}, units: {{$dat->UNITS_BILLED}} },
-        
         @endforeach
         ],
         xkey: 'period',
         ykeys: ['cost','units'],
-        /*xLabelFormat: function(m) {
-          return m.getMonth()+'/'+m.getFullYear(); 
-          },*/
         xLabels:'month',
-        /*dateFormat: function(m) {
-          d = new Date(m);
-          return d.getMonth()+'/'+d.getFullYear(); 
-          },*/
         labels: ['cost','units'],
         hideHover: 'auto',
         resize: true,
-        //redraw: true
       });
-	//}
 	</script>
 @endsection

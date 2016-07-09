@@ -3,7 +3,9 @@
 @section('style')
     <link rel="stylesheet" href="{{ URL::asset('style/503.css') }}">
 @endsection
-@include('include.header')
+@section('header')
+	@include('include.header')
+@endsection
 @section('content')
     <div class="container">
         <div class="row">

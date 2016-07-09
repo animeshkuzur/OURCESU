@@ -2,7 +2,9 @@
 @section('style')
 	<link rel="stylesheet" href="{{ URL::asset('style/register.css') }}">
 @endsection
-@include('include.header')
+@section('header')
+	@include('include.header')
+@endsection
 @section('content')
 	<!----------Content---------->
 	<div class="container">

@@ -5,6 +5,7 @@
 	@yield('style')
 	</head>
 	<body>
+		@yield('header')
 		@yield('content')
 	</body>
 </html>

@@ -3,7 +3,9 @@
 @section('style')
 	<link rel="stylesheet" href="{{ URL::asset('style/forgot.css') }}">
 @endsection
-@include('include.header')
+@section('header')
+	@include('include.header')
+@endsection
 @section('content')
 <div clas="container">
 	<div class="container">
