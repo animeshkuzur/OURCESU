@@ -4,7 +4,6 @@
 	<link rel="stylesheet" href="{{ URL::asset('style/dashboard.css') }}">
 	<script src="{{ URL::asset('bootstrap/js/morris.min.js') }}"></script>
 	<script src="{{ URL::asset('bootstrap/js/raphael-min.js') }}"></script>
-
 @endsection
 @section('header')
 	@include('include.dashboardheader')
@@ -16,6 +15,7 @@
 		<div id="sidebar-wrapper">
 			<ul class="sidebar-nav" id="accordion1">
 				<li class="sidebar-brand"><a href="#">Hi &nbsp;{{ \Auth::user()->name }}&nbsp;!</a></li>
+				<li class="active"><a href="{{ url('/dashboard') }}">Dashboard<span class="glyphicon glyphicon-dashboard"></span></a></li>
 				<li><a data-toggle="collapse" data-parent="#accordion1" href="#meter">Metering<span class="glyphicon glyphicon-chevron-down"></span></a>
 					<ul id="meter" class="collapse">
 	                    <li><a href="#">Meter Protocol Sheet</a></li>
@@ -40,7 +40,7 @@
                		</ul>
 				</li>
 				<li></li>
-				<li><a href="#">Settings<span class="glyphicon glyphicon-cog"></span></a></li>
+				<li><a href="{{ url('/dashboard/settings')}}">Settings<span class="glyphicon glyphicon-cog"></span></a></li>
 				@if(\Auth::check())
 				<li><a href="{{ url('/logout')}}">Logout<span class="glyphicon glyphicon-off"></span></a></li>
 				@else

@@ -131,24 +131,6 @@
 }
 .db-title{
 	margin-top: -20px;
-
-}
-.graph{
-	margin: 15px 0px 0px 0px;
-	padding: 5px;
-	height: 255px;
-	background:white;
-	border-radius: 5px;
-	border: 1px solid #d5d5d5;
-}
-.reading{
-    margin: 15px 5px 0px 0px;
-    padding: 5px;
-    text-align: center;
-    font-size: 20px;
-    background:white;
-    border-radius: 5px;
-    border: 1px solid #d5d5d5;
 }
 .navbar-default > .container{
     padding:0px;
@@ -179,34 +161,6 @@
     margin-right: 25px;
     margin-top:12px;
 }
-.morris-hover{
-    position:absolute;
-    z-index:1000
-}
-.morris-hover.morris-default-style{
-    border-radius:10px;
-    padding:6px;
-    color:#666;
-    background:rgba(255,255,255,0.8);
-    border:solid 2px rgba(230,230,230,0.8);
-    font-family:sans-serif;
-    font-size:12px;
-    text-align:center
-}
-.morris-hover.morris-default-style .morris-hover-row-label{
-    font-weight:bold;
-    margin:0.25em 0
-}
-.morris-hover.morris-default-style .morris-hover-point{
-    white-space:nowrap;
-    margin:0.1em 0
-}
-.content{
-    padding: 0px 15px 0px 15px;
-}
-.notice{
-    margin-top: 15px;
-}
 .glyphicon-dashboard{
     float:right;
     display: inline-block;
@@ -217,4 +171,23 @@
     text-decoration: none;
     color: #fff;
     background: rgba(255,255,255,0.2);
+}
+.details{
+    margin: 15px 0px 0px 0px;
+    padding: 15px;
+    
+    font-size: 15px;
+    background:white;
+    border-radius: 5px;
+    border: 1px solid #d5d5d5;
+}
+.form-group{
+    padding-top:10px;
+}
+hr{
+    margin: 0px;
+    padding: 0px;
+}
+.control-label{
+    padding-top: 5px;
 }

@@ -1,5 +1,5 @@
 <div class="header">
-	<div class="navbar navbar-default navbar-static-top">
+	<div class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
 			<div class="col-md-4">
 				<div class="navbar-brand">

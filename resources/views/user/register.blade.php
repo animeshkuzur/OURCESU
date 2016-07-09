@@ -56,6 +56,7 @@
 							{!! Form::text('CONT_ACC', null, array('class' => 'form-control','placeholder'=>'CONTRACT ACCOUNT NUMBER')) !!}
 						</div>
 						<div class="col-md-6">
+							{!! Form::text('phone', null, array('class' => 'form-control','placeholder'=>'Mobile No.')) !!}
 						</div>
 					</div>
 					<br><br>

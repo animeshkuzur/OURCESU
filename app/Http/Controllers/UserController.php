@@ -42,7 +42,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, User::$register_validation_rules);
-        $data=$request->only('name','lname','email','password','CONT_ACC');
+        $data=$request->only('name','lname','email','password','CONT_ACC','phone');
         $data['password'] = bcrypt($data['password']);
         /*$user = User::create([
             'name' => $data['name'],
@@ -55,6 +55,7 @@ class UserController extends Controller
             'email' => $data['email'],
             'password' => $data['password'],
             'CONT_ACC' => $data['CONT_ACC'],
+            'phone' => $data['phone'],
             'updated_at' => \Carbon\Carbon::now(),
             'created_at'=>\Carbon\Carbon::now(),
             ]);
@@ -121,8 +122,17 @@ class UserController extends Controller
         return view('user.dashboard',['data' => $data]);
     }
 
+    public function settings(){
+        if (\Auth::check()) {
+            $user_cont_acc = \Auth::user()->CONT_ACC;
+            $stl_conn = \DB::connection('sqlsrv_STL');
+            $data = $stl_conn->table('BILLING_OUTPUT_'.date('Y'))->where('CONTRACT_ACC', $user_cont_acc)->limit(1)->get();
+        }
+        return view('user.settings',['data'=>$data]);
+    }
+
     public function apiregister(Request $request){
-            $data=$request->only('name','lname','email','password','CONT_ACC');
+            $data=$request->only('name','lname','email','password','CONT_ACC','phone');
             $data['password'] = bcrypt($data['password']);
         try{
             $user=\DB::table('users')->insert([
@@ -130,6 +140,7 @@ class UserController extends Controller
                 'email' => $data['email'],
                 'password' => $data['password'],
                 'CONT_ACC' => $data['CONT_ACC'],
+                'phone' => $data['phone'],
                 'updated_at' => \Carbon\Carbon::now(),
                 'created_at'=>\Carbon\Carbon::now(),
                 ]);
@@ -144,5 +155,5 @@ class UserController extends Controller
         }
     }
 
-    
+
 }

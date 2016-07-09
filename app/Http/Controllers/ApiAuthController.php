@@ -101,7 +101,7 @@ class ApiAuthController extends Controller
         }
         $users = \DB::select('select * from users where email = :email',['email'=>$data['email']]);
         foreach ($users as $user) {
-            $id = $user->id; $name = $user->name; $email = $user->email; $CONT_ACC = $user->CONT_ACC;
+            $id = $user->id; $name = $user->name; $email = $user->email; $CONT_ACC = $user->CONT_ACC; $phone = $user->phone;
         }
         
         // if no errors are encountered we can return a JWT
@@ -109,6 +109,7 @@ class ApiAuthController extends Controller
                                 'name' => $name,
                                 'email' => $email,
                                 'CONT_ACC' => $CONT_ACC,
+                                'phone' => $phone,
                                 'token' => $token,
                                 ]);
 
