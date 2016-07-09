@@ -101,10 +101,11 @@ class ApiAuthController extends Controller
         }
         $users = \DB::select('select * from users where email = :email',['email'=>$data['email']]);
         $stl_conn = \DB::connection('sqlsrv_STL');
-        $data = $stl_conn->table('BILLING_OUTPUT_'.date('Y'))->where('CONTRACT_ACC', $user_cont_acc)->orderBy('BillMonth', 'asc')->get();
+        
         foreach ($users as $user) {
             $id = $user->id; $name = $user->name; $email = $user->email; $CONT_ACC = $user->CONT_ACC; $phone = $user->phone;
         }
+        $data = $stl_conn->table('BILLING_OUTPUT_'.date('Y'))->where('CONTRACT_ACC', $CONT_ACC)->orderBy('BillMonth', 'asc')->get();
         foreach($data as $dat){
             $cons_acc = $dat->CONS_ACC; $divcode = $dat->DivCode; $division = $dat->DIVISION; $meter_no = $dat->METER_NO;
         }
