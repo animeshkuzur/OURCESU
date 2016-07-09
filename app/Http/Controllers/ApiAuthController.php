@@ -100,8 +100,13 @@ class ApiAuthController extends Controller
             return response()->json(['errorInfo' => 'could_not_create_token'], 500);
         }
         $users = \DB::select('select * from users where email = :email',['email'=>$data['email']]);
+        $stl_conn = \DB::connection('sqlsrv_STL');
+        $data = $stl_conn->table('BILLING_OUTPUT_'.date('Y'))->where('CONTRACT_ACC', $user_cont_acc)->orderBy('BillMonth', 'asc')->get();
         foreach ($users as $user) {
             $id = $user->id; $name = $user->name; $email = $user->email; $CONT_ACC = $user->CONT_ACC; $phone = $user->phone;
+        }
+        foreach($data as $dat){
+            $cons_acc = $dat->CONS_ACC; $divcode = $dat->DivCode; $division = $dat->DIVISION; $meter_no = $dat->METER_NO;
         }
         
         // if no errors are encountered we can return a JWT
@@ -111,6 +116,10 @@ class ApiAuthController extends Controller
                                 'CONT_ACC' => $CONT_ACC,
                                 'phone' => $phone,
                                 'token' => $token,
+                                'CONS_ACC' => $cons_acc,
+                                'DivCode' => $divcode,
+                                'DIVISION' => $division,
+                                'METER_NO' => $meter_no,
                                 ]);
 
     }
