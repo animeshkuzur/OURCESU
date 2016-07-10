@@ -58,13 +58,29 @@
 						<h2 style="color: #d5d5d5;">Dashboard / Settings</h2>
 						<hr class="db-hr">
 					</div>
+					
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+					@if($errors)
+						@if(count($errors))
+							@foreach($errors->all() as $error)	
+								<div class="alert alert-danger alert-dismissible" role="alert">
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									{{ $error }}
+								</div>
+							@endforeach				
+						@endif
+					@endif
+					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-8">
 						<div class="details">
 							<h4>User Account Details</h4>
 							<hr>
-							{!! Form::open(array('route' => 'settings', 'method'=>'POST')) !!}
+							
+							{!! Form::open(array('route' => 'savesettings', 'method'=>'POST')) !!}
 							<div class="row">
 								<div class="form-group">
 									<label for="name" class="col-sm-2 control-label">Name</label>
@@ -93,7 +109,7 @@
 								<div class="form-group">
 									<div class="col-sm-10"></div>
 									<div class="col-sm-2">
-										{!! Form::submit(null, array('class' => 'btn btn-primary btn-block disabled','value'=>'SAVE')) !!}
+										{!! Form::submit('SAVE',array('class' => 'btn btn-primary btn-block','name'=>'submit','disabled'=>'disabled')) !!}
 									</div>
 								</div>
 							</div>
@@ -105,20 +121,51 @@
 						<div class="details">
 							@foreach($data as $dat)
 							@endforeach
-							<p>Contract Account No.:&nbsp;&nbsp;&nbsp;
-							<strong>{{ $dat->CONTRACT_ACC }}</strong></p>
-							
-							<p>Consumer Account No.:&nbsp;&nbsp;&nbsp;
-							<strong>{{ $dat->CONS_ACC }}</strong></p>
-							
-							<p>Division Code:&nbsp;&nbsp;&nbsp;
-							<strong>{{ $dat->DivCode }}</strong></p>
-							
-							<p>Division:&nbsp;&nbsp;&nbsp;
-							<strong>{{ $dat->DIVISION }}</strong></p>
-							
-							<p>Meter No.:&nbsp;&nbsp;&nbsp;
-							<strong>{{ $dat->METER_NO }}</strong></p>
+							<div class="row">
+								<div class="col-xs-7">
+									Contract Account No.:
+								</div>
+								<div class="col-xs-5">
+									<strong>{{ $dat->CONTRACT_ACC }}</strong>
+								</div>
+							</div>
+							<br>
+							<div class="row">
+								<div class="col-xs-7">
+									Consumer Account No.:
+								</div>
+								<div class="col-xs-5">
+									<strong>{{ $dat->CONS_ACC }}</strong>
+								</div>
+							</div>
+							<br>
+							<div class="row">
+								<div class="col-xs-7">
+									Division Code:
+								</div>
+								<div class="col-xs-5">
+									<strong>{{ $dat->DivCode }}</strong>
+								</div>
+							</div>
+							<br>
+							<div class="row">
+								<div class="col-xs-7">
+									Division:
+								</div>
+								<div class="col-xs-5">
+									<strong>{{ $dat->DIVISION }}</strong>
+								</div>
+							</div>
+							<br>
+							<div class="row">
+								<div class="col-xs-7">
+									Meter No.:
+								</div>
+								<div class="col-xs-5">
+									<strong>{{ $dat->METER_NO }}</strong>
+								</div>
+							</div>
+
 						</div>
 					</div>
 				</div>
@@ -128,7 +175,7 @@
 						<div class="details">
 							<h4>Change Password</h4>
 							<hr><br>
-							{!! Form::open(array('route' => 'settings', 'method'=>'POST')) !!}
+							{!! Form::open(array('route' => 'changepassword', 'method'=>'POST')) !!}
 							<div class="row">
 								<div class="col-md-4">
 									{!! Form::password('password1', array('class' => 'form-control','placeholder'=>'Current Password')) !!}
@@ -143,7 +190,7 @@
 							<div class="row">
 								<div class="col-md-10"></div>
 								<div class="col-md-2">
-									{!! Form::submit(null, array('class' => 'btn btn-primary btn-block','value'=>'SAVE')) !!}
+									{!! Form::submit('CHANGE', array('class' => 'btn btn-primary btn-block','name'=>'submit2')) !!}
 								</div>
 							</div>
 							{!! Form::close() !!}
@@ -163,7 +210,14 @@
 			$("#wrapper").toggleClass("toggled");
 		});
 
-
+		$('input[name="name"]').change(function(e){
+			e.preventDefault();
+    			$("input[name='submit']").removeAttr('disabled');
+		});
+		$('input[name="phone"]').change(function(e){
+			e.preventDefault();
+    			$("input[name='submit']").removeAttr('disabled');
+		});
 
 	</script>
 @endsection

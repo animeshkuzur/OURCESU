@@ -34,10 +34,10 @@
 					<br>
 					{!! Form::password('password', array('class' => 'form-control','placeholder'=>'Password')) !!}	
 					<div class="checkbox">
-  						<label><input type="checkbox" value="">Remember Me</label>
+  						<label>{!! Form::checkbox('remember','remember', array('name'=>'remember','tabindex'=>'4')) !!}Remember Me</label>
   						<br>
 					</div>
-					{!! Form::submit(null, array('class' => 'btn btn-primary btn-block','value'=>'LOGIN')) !!}
+					{!! Form::submit('LOGIN', array('class' => 'btn btn-primary btn-block','name'=>'login')) !!}
 					<br>
 					<label>{!! Html::linkRoute('forgot', 'Forgot your password?') !!}</label>
 					<br>

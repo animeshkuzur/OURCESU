@@ -173,7 +173,7 @@
     background: rgba(255,255,255,0.2);
 }
 .details{
-    margin: 15px 0px 0px 0px;
+    margin: 10px 0px 0px 0px;
     padding: 15px;
     
     font-size: 15px;
@@ -185,8 +185,8 @@
     padding-top:10px;
 }
 hr{
-    margin: 0px;
-    padding: 0px;
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 10px 0px;
 }
 .control-label{
     padding-top: 5px;

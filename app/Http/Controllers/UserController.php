@@ -15,6 +15,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         //
@@ -42,27 +43,30 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, User::$register_validation_rules);
-        $data=$request->only('name','lname','email','password','CONT_ACC','phone');
-        $data['password'] = bcrypt($data['password']);
-        /*$user = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => $data['password'],
-            'CONT_ACC' => $data['CONT_ACC'],
-            ]);*/
-        $user=\DB::table('users')->insert([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => $data['password'],
-            'CONT_ACC' => $data['CONT_ACC'],
-            'phone' => $data['phone'],
-            'updated_at' => \Carbon\Carbon::now(),
-            'created_at'=>\Carbon\Carbon::now(),
-            ]);
-        if($user){
-            return redirect()->route('login');
+        $data=$request->only('name','lname','email','password','CONT_ACC','phone','password_confirmation');
+        if($data['password']==$data['password_confirmation']){
+            $data['password'] = bcrypt($data['password']);
+            /*$user = User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => $data['password'],
+                'CONT_ACC' => $data['CONT_ACC'],
+                ]);*/
+            $user=\DB::table('users')->insert([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => $data['password'],
+                'CONT_ACC' => $data['CONT_ACC'],
+                'phone' => $data['phone'],
+                'updated_at' => \Carbon\Carbon::now(),
+                'created_at'=>\Carbon\Carbon::now(),
+                ]);
+            if($user){
+                return redirect()->route('login');
+            }
         }
-        return back()->withInput();
+        
+        return back()->withInput()->withErrors(['email' => 'Confirmation password did not match']);
     }
 
     /**
@@ -94,9 +98,47 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        try{
+        $this->validate($request, User::$info_update_rules);
+        if(empty($errors)){
+            $user = $request->only('name','phone');
+            \DB::table('users')->where('id', \Auth::user()->id)->update(['name' => $user['name'],'phone' => $user['phone']]);
+            return redirect()->route('settings');      
+        }
+        else
+            return back()->withInput();
+        
+        }
+        catch(\Illuminate\Database\QueryException $e){
+
+        }
+    }
+
+    public function changepassword(Request $request){
+        try{
+        $this->validate($request, User::$changepassword_rules);
+        $user = $request->only('password1','password2','password3');
+        if($user['password2']==$user['password3']){
+            if(empty($errors)){     
+                $pass=\DB::table('users')->where('id', \Auth::user()->id)->first();
+                if(\Hash::check($user['password1'],$pass->password)){
+                    \DB::table('users')->where('id', \Auth::user()->id)->update(['password' => bcrypt($user['password2'])]);
+                    return redirect()->route('logout');    
+                }
+                else
+                    return back()->withInput()->withErrors(['password' => 'Wrong Password']);
+            }
+            else
+                return back()->withInput();
+        }
+        else
+            return back()->withInput()->withErrors(['password' => 'Confirmation password did not match']);
+        }
+        catch(\Illuminate\Database\QueryException $e){
+
+        }
     }
 
     /**
@@ -127,8 +169,8 @@ class UserController extends Controller
             $user_cont_acc = \Auth::user()->CONT_ACC;
             $stl_conn = \DB::connection('sqlsrv_STL');
             $data = $stl_conn->table('BILLING_OUTPUT_'.date('Y'))->where('CONTRACT_ACC', $user_cont_acc)->limit(1)->get();
-        }
-        return view('user.settings',['data'=>$data]);
+        } 
+            return view('user.settings',['data'=>$data]);
     }
 
     public function apiregister(Request $request){

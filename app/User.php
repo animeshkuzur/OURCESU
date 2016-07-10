@@ -28,7 +28,7 @@ class User extends Model implements AuthenticatableContract,
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password','CONT_ACC'];
+    protected $fillable = ['name', 'email', 'password','CONT_ACC','phone'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -48,7 +48,18 @@ class User extends Model implements AuthenticatableContract,
         'email' => 'required|email|Unique:users',
         'password' => 'required|min:8',
         'password_confirmation' => 'required',
-        'CONT_ACC' => 'required|AlphaNum'
+        'CONT_ACC' => 'required|Unique:users|AlphaNum',
+        'phone' => 'required|Unique:users|max:10'
+    ];
 
+    public static $info_update_rules = [
+        'name' => 'required',
+        'phone' => 'required|max:10'
+    ];
+
+    public static $changepassword_rules = [
+        'password1' => 'required',
+        'password2' => 'required|min:8',
+        'password3' => 'required|min:8'
     ];
 }

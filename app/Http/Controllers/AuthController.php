@@ -97,8 +97,14 @@ class AuthController extends Controller
     public function loginvalidate(Request $request){
         $this->validate($request, User::$login_validation_rules);
         $data = $request->only('email','password');
-        if(\Auth::attempt($data))
+        $remember = $request->only('remember');
+        if(!empty($remember))
+            $flag = true;
+        else
+            $flag = false;
+        if(\Auth::attempt($data, $flag)){
             return redirect()->intended('dashboard');
+        }
         else
             return back()->withInput()->withErrors(['email' => 'Username or password is invalid']);
     }

@@ -23,7 +23,8 @@ Route::resource('user','UserController',['only'=>['create','store']]);
 Route::get('/dashboard',['middleware' => 'auth', 'as'=>'dashboard','uses'=>'UserController@dashboard']);
 Route::get('/logout',['as'=>'logout','uses'=>'AuthController@logout']);
 Route::get('/dashboard/settings',['middleware' => 'auth', 'as'=>'settings','uses'=>'UserController@settings']);
-Route::post('/dashboard/settings',['middleware' => 'auth', 'as' => 'settings','uses'=>'UserController@update']);
+Route::post('/dashboard/savesettings',['middleware' => 'auth', 'as' => 'savesettings','uses'=>'UserController@update']);
+Route::post('/dashboard/changepassword',['middleware' => 'auth', 'as' => 'changepassword','uses'=>'UserController@changepassword']);
 
 Route::group(['prefix'=>'api'],function(){
 	Route::post('/login', ['uses'=>'ApiAuthController@apilogin']);
