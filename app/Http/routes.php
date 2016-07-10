@@ -34,6 +34,8 @@ Route::group(['prefix'=>'api'],function(){
 	Route::get('/gettoken',['uses' => 'ApiAuthController@getToken']);
 	Route::get('/getstl',['uses' => 'ApiUserController@apistldata']);
 	Route::get('/getsap',['uses' => 'ApiUserController@apisapdata']);
+	Route::post('/savesettings',['uses' => 'ApiUserController@savesettings']);
+	Route::post('/changepassword',['uses' => 'ApiUserController@changepassword']);
 });
 
 

@@ -91,11 +91,14 @@ class ApiUserController extends Controller
             if (!$user = JWTAuth::parseToken()->authenticate()) {
                 return response()->json(['errorInfo' => 'user_not_found'], 404);
             }
-        } catch (\Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
+        } 
+        catch (\Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
             return response()->json(['errorInfo' => 'token_expired'], $e->getStatusCode());
-        } catch (\Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
+        } 
+        catch (\Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
             return response()->json(['errorInfo' => 'token_invalid'], $e->getStatusCode());
-        } catch (\Tymon\JWTAuth\Exceptions\JWTException $e) {
+        } 
+        catch (\Tymon\JWTAuth\Exceptions\JWTException $e) {
             return response()->json(['errorInfo' => 'token_absent'], $e->getStatusCode());
         }
         
@@ -110,11 +113,14 @@ class ApiUserController extends Controller
             if (!$user = JWTAuth::parseToken()->authenticate()) {
                 return response()->json(['errorInfo' => 'user_not_found'], 404);
             }
-        } catch (\Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
+        } 
+        catch (\Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
             return response()->json(['errorInfo' => 'token_expired'], $e->getStatusCode());
-        } catch (\Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
+        } 
+        catch (\Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
             return response()->json(['errorInfo' => 'token_invalid'], $e->getStatusCode());
-        } catch (\Tymon\JWTAuth\Exceptions\JWTException $e) {
+        } 
+        catch (\Tymon\JWTAuth\Exceptions\JWTException $e) {
             return response()->json(['errorInfo' => 'token_absent'], $e->getStatusCode());
         }
         
@@ -122,5 +128,63 @@ class ApiUserController extends Controller
         $stl_conn = \DB::connection('sqlsrv_SAP');
         $data = $stl_conn->table('BILLING_DATA')->where('CONTRACT_ACC', $user_cont_acc)->orderBy('BILL_MONTH', 'asc')->get();
         return response()->json(['Info' => $data]);
+    }
+
+    public function savesettings(Request $request){
+        try {
+            if (!$user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['errorInfo' => 'user_not_found'], 404);
+            }
+            $data = $request->only('name','phone');
+            $id = $user->id;
+            \DB::table('users')->where('id', $user->id)->update(['name' => $data['name'],'phone' => $data['phone']]);
+            $user = JWTAuth::parseToken()->authenticate();
+            return response()->json(compact('user'));
+        } 
+        catch (\Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
+            return response()->json(['errorInfo' => 'token_expired'], $e->getStatusCode());
+        } 
+        catch (\Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
+            return response()->json(['errorInfo' => 'token_invalid'], $e->getStatusCode());
+        } 
+        catch (\Tymon\JWTAuth\Exceptions\JWTException $e) {
+            return response()->json(['errorInfo' => 'token_absent'], $e->getStatusCode());
+        }
+        catch(\Illuminate\Database\QueryException $e){
+            return response()->json(['errorInfo'=> $ex]);
+        }
+
+    }
+
+    public function changepassword(Request $request){
+        try {
+            if (!$user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['errorInfo' => 'user_not_found'], 404);
+            }
+            $data = $request->only('old_password','new_password');
+            $id = $user->id;
+            if(\Hash::check($data['old_password'],$user->password)){
+                \DB::table('users')->where('id', $user->id)->update(['password' => bcrypt($data['new_password'])]);
+                $user = JWTAuth::parseToken()->authenticate();
+                return response()->json(['Info'=>'Password_changed']);
+            }
+            else{
+                return response()->json(['errorInfo' => 'invalid_credentials', 401]);
+            }
+            
+        } 
+        catch (\Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
+            return response()->json(['errorInfo' => 'token_expired'], $e->getStatusCode());
+        } 
+        catch (\Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
+            return response()->json(['errorInfo' => 'token_invalid'], $e->getStatusCode());
+        } 
+        catch (\Tymon\JWTAuth\Exceptions\JWTException $e) {
+            return response()->json(['errorInfo' => 'token_absent'], $e->getStatusCode());
+        }
+        catch(\Illuminate\Database\QueryException $e){
+            return response()->json(['errorInfo'=> $ex]);
+        }
+
     }
 }
