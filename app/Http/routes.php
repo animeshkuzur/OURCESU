@@ -25,6 +25,8 @@ Route::get('/logout',['as'=>'logout','uses'=>'AuthController@logout']);
 Route::get('/dashboard/settings',['middleware' => 'auth', 'as'=>'settings','uses'=>'UserController@settings']);
 Route::post('/dashboard/savesettings',['middleware' => 'auth', 'as' => 'savesettings','uses'=>'UserController@update']);
 Route::post('/dashboard/changepassword',['middleware' => 'auth', 'as' => 'changepassword','uses'=>'UserController@changepassword']);
+Route::get('/dashboard/spot-bills',['middleware' => 'auth', 'as' => 'spot-bills', 'uses' => 'DocController@spotbills']);
+Route::post('/dashboard/getspotbills',['middleware' => 'auth','as' => 'getspotbills','uses'=>'DocController@getspotbills']);
 
 Route::group(['prefix'=>'api'],function(){
 	Route::post('/login', ['uses'=>'ApiAuthController@apilogin']);

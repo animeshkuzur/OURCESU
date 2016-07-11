@@ -23,7 +23,7 @@
 				</li>
 				<li><a data-toggle="collapse" data-parent="#accordion1" href="#bills">Bills<span class="glyphicon glyphicon-chevron-down"></span></a>
 					<ul id="bills" class="collapse">
-	                    <li><a href="#">Spot Bills</a></li>
+	                    <li><a href="{{ url('/dashboard/spot-bills') }}">Spot Bills</a></li>
 	                    <li><a href="#">SAP Bills</a></li>
 	                    <li><a href="#">12 Months Bill</a></li>
 	                    <li><a href="#">Money Receipt</a></li>
@@ -38,7 +38,7 @@
                		</ul>
 				</li>
 				<li></li>
-				<li class="active disabled"><a href="#">Settings<span class="glyphicon glyphicon-cog"></span></a></li>
+				<li class="active disabled"><a href="{{ url('/dashboard/settings') }}">Settings<span class="glyphicon glyphicon-cog"></span></a></li>
 				@if(\Auth::check())
 				<li><a href="{{ url('/logout')}}">Logout<span class="glyphicon glyphicon-off"></span></a></li>
 				@else
