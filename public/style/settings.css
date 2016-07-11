@@ -190,3 +190,6 @@ hr{
 .control-label{
     padding-top: 5px;
 }
+#page-content-wrapper{
+    margin-top: -20px;
+}
