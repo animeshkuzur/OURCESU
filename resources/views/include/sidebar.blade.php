@@ -18,7 +18,7 @@
 				<li><a data-toggle="collapse" data-parent="#accordion1" href="#bills">Billing<span class="glyphicon glyphicon-chevron-down"></span></a>
 					<ul id="bills" class="collapse">
 	                    <li><a href="{{ url('/dashboard/spot-bills') }}">Spot Bills</a></li>
-	                    <li><a href="#">SAP Bills</a></li>
+	                    <li><a href="{{url('/dashboard/sap-bills')}}">SAP Bills</a></li>
 	                    <li><a href="#">12 Months Bill</a></li>
 
 	                    <li><a href="#">Complaints Letter Format</a></li>

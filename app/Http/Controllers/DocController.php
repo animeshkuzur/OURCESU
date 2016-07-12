@@ -123,6 +123,11 @@ class DocController extends Controller
 
     public function moneyreceipt(){
 
+
+        return view('docs.money-receipt');
+    }
+
+    public function sapbills(){
         $user_cont_acc = \Auth::user()->CONT_ACC;
         $stl_conn = \DB::connection('sqlsrv_SAP');
         $months = $stl_conn->table('BILLING_DATA')->where('CONTRACT_ACC', $user_cont_acc)->orderBy('BILL_MONTH', 'desc')->get();
@@ -131,9 +136,5 @@ class DocController extends Controller
         }
 
         return view('docs.money-receipt',['item2'=>$item2]);
-    }
-
-    public function sapbills(){
-        
     }
 }
