@@ -89,24 +89,51 @@ class DocController extends Controller
         $user_cont_acc = \Auth::user()->CONT_ACC;
         $stl_conn = \DB::connection('sqlsrv_STL');
         $years = $stl_conn->select("SELECT * FROM INFORMATION_SCHEMA.TABLES where TABLE_NAME LIKE 'BILLING_OUTPUT_20__';");
-        $item[0]="";
+        $date="";
         foreach ($years as $yr) {
             //$item[substr($yr->TABLE_NAME,15,4)] = substr($yr->TABLE_NAME,15,4);
             $months = $stl_conn->table('BILLING_OUTPUT_'.substr($yr->TABLE_NAME,15,4))->where('CONTRACT_ACC', $user_cont_acc)->orderBy('BillMonth', 'desc')->get();
             foreach ($months as $month) {
-                $item2[substr($month->BillMonth,0,4)."-".substr($month->BillMonth,4,2)]=substr($month->BillMonth,0,4)."-".substr($month->BillMonth,4,2);
+                if(!empty($date)){
+                    $date=substr($month->BillMonth,0,4).substr($month->BillMonth,4,2);
+                }
+                $item2[$month->BillMonth]=substr($month->BillMonth,0,4)."-".substr($month->BillMonth,4,2);
             }
         }
-
-        return view('docs.spot-bills',['item2'=>$item2]);
+        return view('docs.spot-bills',['item2'=>$item2,'date'=>$date]);
     }
 
     public function getspotbills(Request $request){
-        $data = $request->get('date');
-        $date = substr($data,0,4).substr($data, 5,2);
+        $date = $request->get('date');
+        
         $user_cont_acc = \Auth::user()->CONT_ACC;
         $stl_conn = \DB::connection('sqlsrv_STL');
-        $data = $stl_conn->table('BILLING_OUTPUT_'.substr($data,0,4))->where(['CONTRACT_ACC'=>$user_cont_acc,'BillMonth'=>$date])->get();
-        return response()->json($data);
+        $data = $stl_conn->table('BILLING_OUTPUT_'.substr($date,0,4))->where(['CONTRACT_ACC'=>$user_cont_acc,'BillMonth'=>$date])->get();
+        $years = $stl_conn->select("SELECT * FROM INFORMATION_SCHEMA.TABLES where TABLE_NAME LIKE 'BILLING_OUTPUT_20__';");
+        foreach ($years as $yr) {
+            //$item[substr($yr->TABLE_NAME,15,4)] = substr($yr->TABLE_NAME,15,4);
+            $months = $stl_conn->table('BILLING_OUTPUT_'.substr($yr->TABLE_NAME,15,4))->where('CONTRACT_ACC', $user_cont_acc)->orderBy('BillMonth', 'desc')->get();
+            foreach ($months as $month) {
+                $item2[$month->BillMonth]=substr($month->BillMonth,0,4)."-".substr($month->BillMonth,4,2);
+            }
+        }
+
+        return view('docs.spot-bills',['item2'=>$item2,'data'=>$data,'date'=>$date]);
+    }
+
+    public function moneyreceipt(){
+
+        $user_cont_acc = \Auth::user()->CONT_ACC;
+        $stl_conn = \DB::connection('sqlsrv_SAP');
+        $months = $stl_conn->table('BILLING_DATA')->where('CONTRACT_ACC', $user_cont_acc)->orderBy('BILL_MONTH', 'desc')->get();
+        foreach ($months as $month) {
+            $item2[$month->BILL_MONTH]=substr($month->BILL_MONTH,0,4)."-".substr($month->BILL_MONTH,4,2);
+        }
+
+        return view('docs.money-receipt',['item2'=>$item2]);
+    }
+
+    public function sapbills(){
+        
     }
 }

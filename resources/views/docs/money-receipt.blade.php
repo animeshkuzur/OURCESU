@@ -11,16 +11,14 @@
 		
 @include('include.sidebar');
 
-		<!------Content------>
 		<div id="page-content-wrapper">
 			<div class="container-fluid db-title">
 				<div class="row">
 					<div class="col-md-12">
-						<h2 style="color: #d5d5d5;">Dashboard / Bills / Spot Bills</h2>
+						<h2 style="color: #d5d5d5;">Dashboard / Bills / Money Receipt</h2>
 						<hr class="db-hr">
 					</div>
 				</div>
-
 				<div class="row">
 					<div class="col-md-3 col-sm-push-9">
 						<div class="details float">
@@ -62,13 +60,10 @@
 						</div>
 					</div>
 				</div>
-
 			</div>
 		</div>
-	</div>
 
-		<!----Menu Toggle Script and Graph---->
-	<script>
+<script>
 
 
 		$("#menu-toggle").click( function(e){

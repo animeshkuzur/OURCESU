@@ -116,6 +116,10 @@
         position: relative;
         margin-right: 0;
     }
+    .float{
+        position: fixed;
+        z-index: 100;
+    }
 }
 .db-hr{
   border-color: #d5d5d5;
@@ -182,4 +186,10 @@ hr{
 }
 #page-content-wrapper{
     margin-top: -20px;
+}
+.float{    
+    
+}
+.bill{
+
 }
