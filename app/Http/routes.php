@@ -31,7 +31,7 @@ Route::get('/dashboard/getspotbills',['middleware' => 'auth','as' => 'getspotbil
 	return redirect()->route('spot-bills');
 }]);
 Route::get('/dashboard/money-receipt',['middleware'=>'auth','as'=>'moneyreceipt','uses'=>'DocController@moneyreceipt']);
-Route::get('/dashboard/sap-bills',['middleware'=>'auth','as'=>'sap-bills','uses'=>'DocController@sabbills']);
+Route::get('/dashboard/sap-bills',['middleware'=>'auth','as'=>'sap-bills','uses'=>'DocController@sapbills']);
 
 Route::group(['prefix'=>'api'],function(){
 	Route::post('/login', ['uses'=>'ApiAuthController@apilogin']);
