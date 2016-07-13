@@ -87,7 +87,7 @@ class ApiDocController extends Controller
 
     public function apiemobilereceipt(){
         try {
-            if (!$user = JWTAuth::parseToken()->authenticate()) {
+            if (!$user = \JWTAuth::parseToken()->authenticate()) {
                 return response()->json(['errorInfo' => 'user_not_found'], 404);
             }
             
@@ -108,7 +108,7 @@ class ApiDocController extends Controller
         $CONTRACT_ACC = $user->CONT_ACC;
 
         $data = \DB::table('VW_SPOT_MR_DETAILS')->where(['CONTRACT_ACC'=> $CONTRACT_ACC])->orderBy('BillMonth', 'desc')->get();
-        $user = JWTAuth::parseToken()->authenticate();
+        $user = \JWTAuth::parseToken()->authenticate();
         return response()->json(compact('data'));
     }
 }
