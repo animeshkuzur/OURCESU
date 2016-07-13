@@ -107,7 +107,7 @@ class ApiDocController extends Controller
         //$data = $request->only('date');
         $CONTRACT_ACC = $user->CONT_ACC;
 
-        $data = \DB::table('VW_SPOT_MR_DETAILS')->where(['CONTRACT_ACC'=> $CONTRACT_ACC])->get();
+        $data = \DB::table('VW_SPOT_MR_DETAILS')->where(['CONTRACT_ACC'=> $CONTRACT_ACC])->orderBy('BillMonth', 'desc')->get();
         $user = JWTAuth::parseToken()->authenticate();
         return response()->json(compact('data'));
     }
