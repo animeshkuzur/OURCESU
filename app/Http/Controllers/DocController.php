@@ -124,7 +124,7 @@ class DocController extends Controller
     public function moneyreceipt(){
 
 
-        return view('docs.money-receipt');
+        return view('docs.money-receipts');
     }
 
     public function sapbills(){
@@ -135,6 +135,28 @@ class DocController extends Controller
             $item2[$month->BILL_MONTH]=substr($month->BILL_MONTH,0,4)."-".substr($month->BILL_MONTH,4,2);
         }
 
-        return view('docs.money-receipt',['item2'=>$item2]);
+        return view('docs.sap-bills',['item2'=>$item2]);
+    }
+
+    public function emobilereceipt(){
+        $user_cont_acc = \Auth::user()->CONT_ACC;
+        $months = \DB::table('VW_SPOT_MR_DETAILS')->where('CONTRACT_ACC', $user_cont_acc)->orderBy('BillMonth', 'desc')->get();
+        foreach ($months as $month) {
+            $item2[$month->BillMonth]=substr($month->BillMonth,0,4)."-".substr($month->BillMonth,4,2);
+        }
+
+        return view('docs.e-mobile-receipts',['item2'=>$item2]);
+    }
+
+    public function getemobilereceipt(Request $request){
+        $date = $request->get('date');
+        $user_cont_acc = \Auth::user()->CONT_ACC;
+        $data = \DB::table('VW_SPOT_MR_DETAILS')->where(['CONTRACT_ACC'=> $user_cont_acc,'BillMonth'=>$date])->get();
+        $months = \DB::table('VW_SPOT_MR_DETAILS')->where('CONTRACT_ACC', $user_cont_acc)->orderBy('BillMonth', 'desc')->get();
+        foreach ($months as $month) {
+            $item2[$month->BillMonth]=substr($month->BillMonth,0,4)."-".substr($month->BillMonth,4,2);
+        }
+
+        return view('docs.e-mobile-receipts',['item2'=>$item2,'data'=>$data]);
     }
 }

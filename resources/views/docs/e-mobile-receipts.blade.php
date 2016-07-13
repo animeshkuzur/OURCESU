@@ -11,22 +11,20 @@
 		
 @include('include.sidebar');
 
-		<!------Content------>
 		<div id="page-content-wrapper">
 			<div class="container-fluid db-title">
 				<div class="row">
 					<div class="col-md-12">
-						<h2 style="color: #d5d5d5;">Dashboard / Billing / Spot Bills</h2>
+						<h2 style="color: #d5d5d5;">Dashboard / Billing / E-Mobile Receipt</h2>
 						<hr class="db-hr">
 					</div>
 				</div>
-
 				<div class="row">
 					<div class="col-md-3 col-sm-push-9">
 						<div class="details float">
 							<h4>Select Date</h4>
 							<hr>
-							{!! Form::open(array('route' => 'getspotbills', 'method'=>'POST')) !!}
+							{!! Form::open(array('route' => 'getemobilereceipt', 'method'=>'POST')) !!}
 							<div class="row">
 								<div class="form-group">
 									<label for="date" class="col-sm-4 control-label">Date:</label>
@@ -57,18 +55,15 @@
 						@if(isset($data))
 							@foreach($data as $dat)
 							@endforeach
-							@include('bills.spot-bill')
+							@include('bills.e-mobile-receipt')
 						@endif
 						</div>
 					</div>
 				</div>
-
 			</div>
 		</div>
-	</div>
 
-		<!----Menu Toggle Script and Graph---->
-	<script>
+<script>
 
 
 		$("#menu-toggle").click( function(e){

@@ -53,7 +53,7 @@ class UserController extends Controller
                 'CONT_ACC' => $data['CONT_ACC'],
                 ]);*/
             $user=\DB::table('users')->insert([
-                'name' => $data['name'],
+                'name' => $data['name']." ".$data['lname'],
                 'email' => $data['email'],
                 'password' => $data['password'],
                 'CONT_ACC' => $data['CONT_ACC'],
@@ -178,7 +178,7 @@ class UserController extends Controller
             $data['password'] = bcrypt($data['password']);
         try{
             $user=\DB::table('users')->insert([
-                'name' => $data['name'],
+                'name' => $data['name']." ".$data['lname'],
                 'email' => $data['email'],
                 'password' => $data['password'],
                 'CONT_ACC' => $data['CONT_ACC'],

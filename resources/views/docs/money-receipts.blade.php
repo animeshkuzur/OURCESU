@@ -15,7 +15,7 @@
 			<div class="container-fluid db-title">
 				<div class="row">
 					<div class="col-md-12">
-						<h2 style="color: #d5d5d5;">Dashboard / Bills / Money Receipt</h2>
+						<h2 style="color: #d5d5d5;">Dashboard / Billing / Money Receipt</h2>
 						<hr class="db-hr">
 					</div>
 				</div>

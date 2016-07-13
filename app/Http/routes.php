@@ -30,8 +30,13 @@ Route::post('/dashboard/getspotbills',['middleware' => 'auth','as' => 'getspotbi
 Route::get('/dashboard/getspotbills',['middleware' => 'auth','as' => 'getspotbills', function(){
 	return redirect()->route('spot-bills');
 }]);
-Route::get('/dashboard/money-receipt',['middleware'=>'auth','as'=>'moneyreceipt','uses'=>'DocController@moneyreceipt']);
+Route::get('/dashboard/money-receipts',['middleware'=>'auth','as'=>'moneyreceipt','uses'=>'DocController@moneyreceipt']);
 Route::get('/dashboard/sap-bills',['middleware'=>'auth','as'=>'sap-bills','uses'=>'DocController@sapbills']);
+Route::get('/dashboard/e-mobile-receipts',['middleware'=>'auth','as'=>'emobilereceipt','uses'=>'DocController@emobilereceipt']);
+Route::post('/dashboard/getemobilereceipts',['middleware'=>'auth','as'=>'getemobilereceipt','uses'=>'DocController@getemobilereceipt']);
+Route::get('/dashboard/getemobilereceipts',['middleware'=>'auth','as'=>'getemobilereceipt',function(){
+	return redirect()->route('emobilereceipt');
+}]);
 
 Route::group(['prefix'=>'api'],function(){
 	Route::post('/login', ['uses'=>'ApiAuthController@apilogin']);
@@ -43,6 +48,7 @@ Route::group(['prefix'=>'api'],function(){
 	Route::get('/getsap',['uses' => 'ApiUserController@apisapdata']);
 	Route::get('/savesettings',['uses' => 'ApiUserController@savesettings']);
 	Route::get('/changepassword',['uses' => 'ApiUserController@changepassword']);
+	Route::get('/getemobilereceipt',['uses' => 'ApiDocController@apiemobilereceipt']);
 });
 
 
