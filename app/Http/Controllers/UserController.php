@@ -53,7 +53,7 @@ class UserController extends Controller
                 'CONT_ACC' => $data['CONT_ACC'],
                 ]);*/
             $user=\DB::table('users')->insert([
-                'name' => $data['name']." ".$data['lname'],
+                'name' => $data['name']." ".$data['lname']." ",
                 'email' => $data['email'],
                 'password' => $data['password'],
                 'CONT_ACC' => $data['CONT_ACC'],
@@ -104,7 +104,7 @@ class UserController extends Controller
         $this->validate($request, User::$info_update_rules);
         if(empty($errors)){
             $user = $request->only('name','phone');
-            \DB::table('users')->where('id', \Auth::user()->id)->update(['name' => $user['name'],'phone' => $user['phone']]);
+            \DB::table('users')->where('id', \Auth::user()->id)->update(['name' => $user['name']." ",'phone' => $user['phone']]);
             return redirect()->route('settings');      
         }
         else
@@ -178,7 +178,7 @@ class UserController extends Controller
             $data['password'] = bcrypt($data['password']);
         try{
             $user=\DB::table('users')->insert([
-                'name' => $data['name']." ".$data['lname'],
+                'name' => $data['name']." ".$data['lname']." ",
                 'email' => $data['email'],
                 'password' => $data['password'],
                 'CONT_ACC' => $data['CONT_ACC'],

@@ -32,6 +32,7 @@ Route::get('/dashboard/getspotbills',['middleware' => 'auth','as' => 'getspotbil
 }]);
 Route::get('/dashboard/money-receipts',['middleware'=>'auth','as'=>'moneyreceipt','uses'=>'DocController@moneyreceipt']);
 Route::get('/dashboard/sap-bills',['middleware'=>'auth','as'=>'sap-bills','uses'=>'DocController@sapbills']);
+
 Route::get('/dashboard/e-mobile-receipts',['middleware'=>'auth','as'=>'emobilereceipt','uses'=>'DocController@emobilereceipt']);
 Route::post('/dashboard/getemobilereceipts',['middleware'=>'auth','as'=>'getemobilereceipt','uses'=>'DocController@getemobilereceipt']);
 Route::get('/dashboard/getemobilereceipts',['middleware'=>'auth','as'=>'getemobilereceipt',function(){

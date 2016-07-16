@@ -1,7 +1,7 @@
 	<style type="text/css">
 		.container-b{
 			color: black;
-			width:330px;
+			max-width:330px;
 			border: 1px solid black;
 			padding-left: 5px;
 			padding-right: 5px;
