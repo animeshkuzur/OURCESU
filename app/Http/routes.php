@@ -48,7 +48,7 @@ Route::group(['prefix'=>'api'],function(){
 	Route::get('/getsap',['uses' => 'ApiUserController@apisapdata']);
 	Route::get('/savesettings',['uses' => 'ApiUserController@savesettings']);
 	Route::get('/changepassword',['uses' => 'ApiUserController@changepassword']);
-	Route::get('/getemobilereceipt',['uses' => 'ApiDocController@apiemobilereceipt']);
+	Route::get('/apiemobilereceipt',['uses' => 'ApiDocController@apiemobilereceipt']);
 });
 
 
