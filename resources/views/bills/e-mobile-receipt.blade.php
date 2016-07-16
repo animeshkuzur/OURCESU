@@ -96,6 +96,44 @@
 				{{$dat->PAY_MODE}}
 			</div>
 		</div>
+		@if(strtoupper($dat->PAY_MODE) == 'CHEQUE')
+			<div class="row">
+				<div class="col-xs-5 left">
+				BANK
+				</div>
+				<div class="col-xs-2">:</div>
+				<div class="col-xs-5 left">
+					{{$dat->BANK_NAME}}
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-5 left">
+				CHEQUE NO.
+				</div>
+				<div class="col-xs-2">:</div>
+				<div class="col-xs-5 left">
+					{{$dat->CHEQE_NO}}
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-5 left">
+				CHEQUE DATE
+				</div>
+				<div class="col-xs-2">:</div>
+				<div class="col-xs-5 left">
+					{{$dat->CHEQE_DATE}}
+				</div>
+			</div>
+		@endif
+		<div class="row">
+			<div class="col-xs-5 left">
+				PAYMENT DATE
+			</div>
+			<div class="col-xs-2">:</div>
+			<div class="col-xs-5 left">
+				{{$dat->PAY_DATE}}
+			</div>
+		</div>
 		<div class="row">
 			<div class="col-xs-5 left">
 				COLLECTOR
