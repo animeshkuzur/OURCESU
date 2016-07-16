@@ -32,6 +32,8 @@
 	                    <li><a href="#">Final Assessment</a></li>
                		</ul>
 				</li>
+				<li><a data-toggle="collapse" data-parent="#accordion1" href="#service">Service Requested<span class="glyphicon glyphicon-chevron-down"></span></a>
+				<li><a data-toggle="collapse" data-parent="#accordion1" href="#payment">Payments<span class="glyphicon glyphicon-chevron-down"></span></a>
 				<li></li>
 				<li><a href="{{ url('/dashboard/settings')}}">Settings<span class="glyphicon glyphicon-cog"></span></a></li>
 				@if(\Auth::check())
