@@ -5,7 +5,7 @@
 				<li><a href="{{ url('/dashboard') }}">Dashboard<span class="glyphicon glyphicon-dashboard"></span></a></li>
 				<li><a data-toggle="collapse" data-parent="#accordion1" href="#coll">Payments<span class="glyphicon glyphicon-chevron-down"></span></a>
 					<ul id="coll" class="collapse">
-						<li><a href="{{url('/dashboard/e-mobile-receipts')}}">E-Mobile Receipt</a></li>
+						<li><a href="{{url('/dashboard/e-mobile-receipts')}}">E-Money Receipt</a></li>
 	                    <li><a href="{{url('/dashboard/money-receipts')}}">Money Receipt</a></li>
                		</ul>
 				</li>
@@ -21,8 +21,6 @@
 	                    <li><a href="{{ url('/dashboard/spot-bills') }}">Spot Bills</a></li>
 	                    <li><a href="{{url('/dashboard/sap-bills')}}">SAP Bills</a></li>
 	                    <li><a href="#">12 Months Bill</a></li>
-
-	                    <li><a href="#">Complaints Letter Format</a></li>
                		</ul>
 				</li>
 				<li><a data-toggle="collapse" data-parent="#accordion1" href="#service">Service Requested<span class="glyphicon glyphicon-chevron-right"></span></a>

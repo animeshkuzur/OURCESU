@@ -139,13 +139,23 @@ class DocController extends Controller
     }
 
     public function emobilereceipt(){
+        try{
         $user_cont_acc = \Auth::user()->CONT_ACC;
         $months = \DB::table('VW_SPOT_MR_DETAILS')->where('CONTRACT_ACC', $user_cont_acc)->orderBy('BillMonth', 'desc')->get();
-        foreach ($months as $month) {
-            $item2[$month->BillMonth]=substr($month->BillMonth,0,4)."-".substr($month->BillMonth,4,2);
+            if($months){
+                foreach ($months as $month) {
+                    $item2[$month->BillMonth]=substr($month->BillMonth,0,4)."-".substr($month->BillMonth,4,2);
+                }
+                return view('docs.e-mobile-receipts',['item2'=>$item2]);
+            }
+            else{
+                $item2=NULL;
+                return view('docs.e-mobile-receipts',['item2'=>$item2]);
+            }
         }
-
-        return view('docs.e-mobile-receipts',['item2'=>$item2]);
+        catch(Exception $e){            
+            return view('errors.503');
+        }
     }
 
     public function getemobilereceipt(Request $request){

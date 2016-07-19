@@ -15,10 +15,11 @@
 			<div class="container-fluid db-title">
 				<div class="row">
 					<div class="col-md-12">
-						<h2 style="color: #d5d5d5;">Dashboard / Billing / E-Mobile Receipt</h2>
+						<h2 style="color: #d5d5d5;">Dashboard / Billing / E-Money Receipt</h2>
 						<hr class="db-hr">
 					</div>
 				</div>
+				@if(!empty($item2))
 				<div class="row">
 					<div class="col-md-3 col-sm-push-9">
 						<div class="details float">
@@ -60,6 +61,18 @@
 						</div>
 					</div>
 				</div>
+				@endif
+				@if(empty($item2))
+					<div class="row">
+						<div class="col-md-12">
+							<div class="details bill">
+							<br>
+								<h1 style="text-align: center;"><span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;&nbsp;NO RECORD FOUND!</h1>
+								<br><br>
+							</div>
+						</div>
+					</div>
+				@endif
 			</div>
 		</div>
 

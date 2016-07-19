@@ -135,4 +135,34 @@ class ApiDocController extends Controller
         
     }
 
+    public function getservicereq(){
+        try {
+            if (!$user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['errorInfo' => 'user_not_found'], 404);
+            }
+            
+        } 
+        catch (\Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
+            return response()->json(['errorInfo' => 'token_expired'], $e->getStatusCode());
+        } 
+        catch (\Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
+            return response()->json(['errorInfo' => 'token_invalid'], $e->getStatusCode());
+        } 
+        catch (\Tymon\JWTAuth\Exceptions\JWTException $e) {
+            return response()->json(['errorInfo' => 'token_absent'], $e->getStatusCode());
+        }
+        catch(\Illuminate\Database\QueryException $e){
+            return response()->json(['errorInfo'=> $ex]);
+        }
+        $CONS_ACC=NULL;
+        $CONTRACT_ACC = $user->CONT_ACC;
+        $USER_DATA = \DB::table('users')->join('users_details','users.id','=','users_details.users_id')->where('CONT_ACC',$CONTRACT_ACC)->get();
+        foreach ($USER_DATA as $dat) {
+            $CONS_ACC = $dat->CONSUMER_ACC;
+        }
+        $service_conn = \DB::connection('sqlsrv_SERVICE');
+        $data=$service_conn->table('CC_REQ_MAS')->join('CC_SERVICE_TYPE_MAS','CC_REQ_MAS.SERVICE_TYPE_ID','=','CC_SERVICE_TYPE_MAS.SERVICE_TYPE_ID')->join('CC_SERVICE_TYPE_GROUP_MAS','CC_SERVICE_TYPE_GROUP_MAS.SERVICE_TYPE_GROUP_ID','=','CC_SERVICE_TYPE_MAS.SERVICE_TYPE_GROUP_ID')->where('CONS_ACC',$CONS_ACC)->get();
+        return response()->json(['Info' => $data]);
+    }
+
 }
