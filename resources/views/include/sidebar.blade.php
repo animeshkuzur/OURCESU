@@ -3,7 +3,7 @@
 			<ul class="sidebar-nav" id="accordion1">
 				<li class="sidebar-brand"><a href="#">Hi &nbsp;{{ substr(\Auth::user()->name,0,strpos(\Auth::user()->name,' ')) }}&nbsp;!</a></li>
 				<li><a href="{{ url('/dashboard') }}">Dashboard<span class="glyphicon glyphicon-dashboard"></span></a></li>
-				<li><a data-toggle="collapse" data-parent="#accordion1" href="#coll">Collection<span class="glyphicon glyphicon-chevron-down"></span></a>
+				<li><a data-toggle="collapse" data-parent="#accordion1" href="#coll">Payments<span class="glyphicon glyphicon-chevron-down"></span></a>
 					<ul id="coll" class="collapse">
 						<li><a href="{{url('/dashboard/e-mobile-receipts')}}">E-Mobile Receipt</a></li>
 	                    <li><a href="{{url('/dashboard/money-receipts')}}">Money Receipt</a></li>
@@ -25,7 +25,6 @@
 	                    <li><a href="#">Complaints Letter Format</a></li>
                		</ul>
 				</li>
-				<li><a data-toggle="collapse" data-parent="#accordion1" href="#payment">Payments<span class="glyphicon glyphicon-chevron-right"></span></a>
 				<li><a data-toggle="collapse" data-parent="#accordion1" href="#service">Service Requested<span class="glyphicon glyphicon-chevron-right"></span></a>
 				<li></li>
 								<li><a data-toggle="collapse" data-parent="#accordion1" href="#comp">Compliance Lists<span class="glyphicon glyphicon-chevron-down"></span></a>
