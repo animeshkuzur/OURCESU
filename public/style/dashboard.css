@@ -161,18 +161,19 @@
     -o-transition: all 0.25s ease;
     transition: all 0.25s ease;
 }
-.glyphicon-chevron-down{
-    float:right;
-    display: inline-block;
-    margin-right: 25px;
-    margin-top:12px;
-}
 .glyphicon-chevron-right{
     float:right;
     display: inline-block;
     margin-right: 25px;
     margin-top:12px;
 }
+.glyphicon-chevron-down{
+    float:right;
+    display: inline-block;
+    margin-right: 25px;
+    margin-top:12px;
+}
+
 .glyphicon-cog{
     float:right;
     display: inline-block;
