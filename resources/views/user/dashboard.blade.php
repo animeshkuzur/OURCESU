@@ -68,11 +68,27 @@
 				</div>
 
 				<div class="row">
-				<div class="col-md-12">
-					<div class="reading" style="height: 50px;">
-					
+					<div class="col-md-3">
+						<a class="btn btn-lg btn-primary btn-block shcut">
+						<span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;&nbsp;&nbsp;Feedback 
+						</a>					
 					</div>
-				</div>
+					<div class="col-md-3">
+						<a class="btn btn-lg btn-success btn-block shcut" href="{{ url('/dashboard/settings')}}">
+						<span class="glyphicon glyphicon-wrench"></span>&nbsp;&nbsp;&nbsp;&nbsp;Settings 
+						</a>					
+					</div>
+					<div class="col-md-3">
+						<a class="btn btn-lg btn-warning btn-block shcut">
+						<span class="glyphicon glyphicon-earphone"></span>&nbsp;&nbsp;&nbsp;&nbsp;Contact Us 
+						</a>					
+					</div>
+					<div class="col-md-3">
+						<a class="btn btn-lg btn-danger btn-block shcut">
+						<span class="glyphicon glyphicon-phone"></span>&nbsp;&nbsp;&nbsp;&nbsp;Download App 
+						</a>					
+					</div>
+
 				</div>
 
 			</div>

@@ -52,11 +52,8 @@
 					</div>
 					<div class="col-md-9 col-sm-pull-3">
 						<div class="details bill">
-						@if(isset($data))
-							@foreach($data as $dat)
-							@endforeach
-							@include('bills.spot-bill')
-						@endif
+						
+							@include('bills.sap-bill')
 						</div>
 					</div>
 				</div>

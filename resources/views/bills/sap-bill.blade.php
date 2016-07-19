@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>SAP Bill</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
 	<style type="text/css">
 		.container-b{
 			color: black;
-			max-width:800px;
+			max-width:820px;
 			border: 1px solid black;
 			margin-left: auto;
 			margin-right: auto;
@@ -22,9 +17,25 @@
 		.right{
 			text-align: right;
 		}
+		.sap-logo{
+			height: 40%;
+			width: 40%;
+		}
+		.sec{
+			border: 1px solid black;
+			padding: 5px;	
+		}
+		.sap-tab{
+			font-size: 13px;
+		}
+		.sap-tab-bor{
+			border: 1px solid black;
+			text-align: center;
+		}
+		.sap-tab-cont{
+			font-size: 11px;
+		}
 	</style>
-</head>
-<body>
 	<div class="container-b">
 		<div class="row">
 			<div class="col-xs-4 left">
@@ -526,6 +537,3 @@
 			</div>
 		</div>
 	</div>
-
-</body>
-</html>

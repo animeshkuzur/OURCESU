@@ -167,6 +167,12 @@
     margin-right: 25px;
     margin-top:12px;
 }
+.glyphicon-chevron-right{
+    float:right;
+    display: inline-block;
+    margin-right: 25px;
+    margin-top:12px;
+}
 .glyphicon-cog{
     float:right;
     display: inline-block;
@@ -220,4 +226,7 @@
 }
 #page-content-wrapper{
     margin-top: -20px;
+}
+.shcut{
+    margin-bottom: 10px;
 }

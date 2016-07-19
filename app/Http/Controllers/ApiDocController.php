@@ -109,6 +109,30 @@ class ApiDocController extends Controller
         $CONTRACT_ACC = $user->CONT_ACC;
 
         $data = \DB::table('VW_SPOT_MR_DETAILS')->where(['CONTRACT_ACC'=> $CONTRACT_ACC])->orderBy('BillMonth', 'desc')->get();
-        return response()->json(compact('data'));
+        return response()->json(['Info' => $data]);
     }
+
+    public function apimoneyreceipt(){
+        try {
+            if (!$user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['errorInfo' => 'user_not_found'], 404);
+            }
+            
+        } 
+        catch (\Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
+            return response()->json(['errorInfo' => 'token_expired'], $e->getStatusCode());
+        } 
+        catch (\Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
+            return response()->json(['errorInfo' => 'token_invalid'], $e->getStatusCode());
+        } 
+        catch (\Tymon\JWTAuth\Exceptions\JWTException $e) {
+            return response()->json(['errorInfo' => 'token_absent'], $e->getStatusCode());
+        }
+        catch(\Illuminate\Database\QueryException $e){
+            return response()->json(['errorInfo'=> $ex]);
+        }
+
+        
+    }
+
 }
