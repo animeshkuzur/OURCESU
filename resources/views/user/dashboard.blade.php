@@ -79,9 +79,9 @@
 						</a>					
 					</div>
 					<div class="col-md-3">
-						<a class="btn btn-lg btn-warning btn-block shcut">
+						<button type="button" class="btn btn-lg btn-warning btn-block shcut" data-toggle="modal" data-target="#ContactUs">
 						<span class="glyphicon glyphicon-earphone"></span>&nbsp;&nbsp;&nbsp;&nbsp;Contact Us 
-						</a>					
+						</button>					
 					</div>
 					<div class="col-md-3">
 						<a class="btn btn-lg btn-danger btn-block shcut">
@@ -95,6 +95,37 @@
 		</div>
 	</div>
 
+
+	<div class="modal fade" id="ContactUs" role="dialog">
+    	<div class="modal-dialog">
+      		<div class="modal-content">
+        		<div class="modal-header">
+          			<button type="button" class="close" data-dismiss="modal">&times;</button>
+          			<h4 class="modal-title" style="text-align: center;">CONTACT US</h4>
+        		</div>
+        		<div class="modal-body">
+          			<p style="text-align: center;"><strong>Call Our 24*7 Comusmer Care</strong></p>
+          			<p style="text-align: center;">933 833 4444</p>
+          			<p style="text-align: center;">0674 301 4444</p>
+          			<br>
+          			<p style="text-align: center;"><strong>Mail at</strong></p>
+          			<p style="text-align: center;">care@ourcesu.com</p>
+          			<br>
+          			<p style="text-align: center;"><strong>Write to</strong></p>
+          			<p style="text-align: center;">Riverside Utilities Pvt. Ltd, 370/373, Highway Honda </p>
+          			<p style="text-align: center;">Complex. NH5, Rudrapur, Pahala, Bhubaneshwar - </p>
+          			<p style="text-align: center;">752101, Odisha, India.</p>
+          			<br>
+          			<p style="text-align: center;"><strong>Meet us at</strong></p>
+          			<p style="text-align: center;">Service Unit: 551, PRATAPRUDRAPUR </p>
+
+        		</div>
+        		<div class="modal-footer">
+          			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        		</div>
+      		</div>
+    	</div>
+  	</div>
 	<!----Menu Toggle Script and Graph---->
 	<script>
 

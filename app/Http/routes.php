@@ -38,6 +38,7 @@ Route::post('/dashboard/getemobilereceipts',['middleware'=>'auth','as'=>'getemob
 Route::get('/dashboard/getemobilereceipts',['middleware'=>'auth','as'=>'getemobilereceipt',function(){
 	return redirect()->route('emobilereceipt');
 }]);
+Route::get('/dashboard/service-request',['middleware'=>'auth','as'=>'servicerequest','uses'=>'DocController@servicerequest']);
 
 Route::group(['prefix'=>'api'],function(){
 	Route::post('/login', ['uses'=>'ApiAuthController@apilogin']);

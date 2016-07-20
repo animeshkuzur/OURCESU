@@ -23,7 +23,7 @@
 	                    <li><a href="#">12 Months Bill</a></li>
                		</ul>
 				</li>
-				<li><a data-toggle="collapse" data-parent="#accordion1" href="#service">Service Requested<span class="glyphicon glyphicon-chevron-right"></span></a>
+				<li><a href="{{ url('/dashboard/service-request') }}">Service Requested<span class="glyphicon glyphicon-chevron-right"></span></a>
 				<li></li>
 								<li><a data-toggle="collapse" data-parent="#accordion1" href="#comp">Compliance Lists<span class="glyphicon glyphicon-chevron-down"></span></a>
 					<ul id="comp" class="collapse">
