@@ -183,4 +183,9 @@ class DocController extends Controller
 
         return view('docs.service-request',['data'=>$data]);
     }
+
+    public function feedbacks(){
+
+        return view('docs.feedback');
+    }
 }
