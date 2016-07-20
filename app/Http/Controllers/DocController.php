@@ -173,12 +173,12 @@ class DocController extends Controller
     public function servicerequest(){
         $CONS_ACC=NULL;
         $CONTRACT_ACC = \Auth::user()->CONT_ACC;
-        $service_conn = \DB::connection('sqlsrv_SERVICE');
-        $USER_DATA = \DB::table('users')->join('CBS_PAY.dbo.ACCOUNT_MASTER','users.CONT_ACC','=','CBS_PAY.dbo.ACCOUNT_MASTER.CONTRACT_ACC')->where('CONT_ACC',$CONTRACT_ACC)->get();
+        $stl_conn = \DB::connection('sqlsrv_STL');
+        $USER_DATA = $stl_conn->table('BILLING_OUTPUT_'.date('Y'))->where('CONTRACT_ACC', $CONTRACT_ACC)->limit(1)->get();
         foreach ($USER_DATA as $dat) {
             $CONS_ACC = $dat->CONS_ACC;
         }
-        
+        $service_conn = \DB::connection('sqlsrv_SERVICE');
         $data=$service_conn->table('CC_REQ_MAS')->join('CC_SERVICE_TYPE_MAS','CC_REQ_MAS.SERVICE_TYPE_ID','=','CC_SERVICE_TYPE_MAS.SERVICE_TYPE_ID')->join('CC_SERVICE_TYPE_GROUP_MAS','CC_SERVICE_TYPE_GROUP_MAS.SERVICE_TYPE_GROUP_ID','=','CC_SERVICE_TYPE_MAS.SERVICE_TYPE_GROUP_ID')->where('CONS_ACC',$CONS_ACC)->get();
 
         return view('docs.service-request',['data'=>$data]);
