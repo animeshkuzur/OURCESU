@@ -44,7 +44,10 @@ class UserController extends Controller
     {
         $this->validate($request, User::$register_validation_rules);
         $data=$request->only('name','lname','email','password','CONT_ACC','phone','password_confirmation');
-        if($data['password']==$data['password_confirmation']){
+        $stl_conn = \DB::connection('sqlsrv_STL');
+        $USER_DATA = $stl_conn->table('BILLING_OUTPUT_'.date('Y'))->where('CONTRACT_ACC', $data['CONT_ACC'])->limit(1)->get();
+        if(!empty($USER_DATA)){
+            if($data['password']==$data['password_confirmation']){
             $data['password'] = bcrypt($data['password']);
             /*$user = User::create([
                 'name' => $data['name'],
@@ -61,12 +64,18 @@ class UserController extends Controller
                 'updated_at' => \Carbon\Carbon::now(),
                 'created_at'=>\Carbon\Carbon::now(),
                 ]);
-            if($user){
-                return redirect()->route('login');
+                if($user){
+                    return redirect()->route('login');
+                }
+            }
+            else{
+            return back()->withInput()->withErrors(['email' => 'Confirmation password did not match']);
             }
         }
-        
-        return back()->withInput()->withErrors(['email' => 'Confirmation password did not match']);
+        else{
+            return back()->withInput()->withErrors(['CONT_ACC' => 'No such Contract Account Number exist']);
+        }
+
     }
 
     /**
@@ -174,23 +183,30 @@ class UserController extends Controller
     }
 
     public function apiregister(Request $request){
+        try{
             $data=$request->only('name','lname','email','password','CONT_ACC','phone');
             $data['password'] = bcrypt($data['password']);
-        try{
-            $user=\DB::table('users')->insert([
-                'name' => $data['name']." ".$data['lname']." ",
-                'email' => $data['email'],
-                'password' => $data['password'],
-                'CONT_ACC' => $data['CONT_ACC'],
-                'phone' => $data['phone'],
-                'updated_at' => \Carbon\Carbon::now(),
-                'created_at'=>\Carbon\Carbon::now(),
-                ]);
+            $stl_conn = \DB::connection('sqlsrv_STL');
+            $USER_DATA = $stl_conn->table('BILLING_OUTPUT_'.date('Y'))->where('CONTRACT_ACC', $data['CONT_ACC'])->limit(1)->get();
+            if(!empty($USER_DATA)){
+                $user=\DB::table('users')->insert([
+                    'name' => $data['name']." ".$data['lname']." ",
+                    'email' => $data['email'],
+                    'password' => $data['password'],
+                    'CONT_ACC' => $data['CONT_ACC'],
+                    'phone' => $data['phone'],
+                    'updated_at' => \Carbon\Carbon::now(),
+                    'created_at'=>\Carbon\Carbon::now(),
+                    ]);
 
-            if($user){
-                return response()->json(['Info' => 'user_registered'], 200);
+                if($user){
+                    return response()->json(['Info' => 'user_registered'], 200);
+                }
+                return response()->json(['errorInfo' => 'credentials_exists'], 401);
             }
-            return response()->json(['errorInfo' => 'credentials_exists'], 401);
+            else{
+                return response()->json(['errorInfo' => 'No such Contract Account Number exist'], 401);
+            }
         }
         catch(\Illuminate\Database\QueryException $ex){
             return response()->json($ex);
