@@ -33,12 +33,6 @@
 								</div>
 							</div>
 							{!! Form::close() !!}
-							<p><hr></p>
-							<div class="row">
-								<div class="col-md-12">
-									<a class="btn btn-danger btn-block disabled" href="#" role="button">DOWNLOAD</a>	
-								</div>
-							</div>
 						</div>
 					</div>
 					<div class="col-md-9 col-sm-pull-3">
@@ -56,25 +50,92 @@
 										<table class="table table-striped">
 										    <thead>
 										      <tr style="font-size: 12px;">
-										        <th>REQ No.</th>
-										        <th>SERVICE</th>
-										        <th>REQ By</th>
-										        <th>REQUESTER's MOBILE No.</th>
-										        <th>REQ ACTION By</th>
-										        <th>REQ ACTION DATE</th>
-										        <th>REMARKS</th>
+										        <th>Req No.</th>
+										        <th>Req Datetime</th>
+										        <th>Service</th>
+										        <th>Req By</th>
+										        <th>Requester's Mobile No.</th>
+										        <th>Req Status</th>
+										        
+										        <th>Req Action Date</th>
+										        <th>Acknowledgement Slip</th>
 										      </tr>
 										    </thead>
 										    <tbody>
 										    	@foreach($data as $dat)
 										      	<tr style="font-size: 12px;">
 										        	<td>{{ $dat->REQ_NO }}</td>
+										        	<td>{{ $dat->EntryDate }}</td>
 										        	<td>{{ $dat->SERVICE_TYPE_GROUP_NAME }} - {{ $dat->SERVICE_TYPE_NAME }}</td>
 										        	<td>{{ $dat->REQUESTEDBY }}</td>
 										        	<td>{{ $dat->REQUESTER_MOBILENO }}</td>
-										        	<td>{{ $dat->REQ_ACTION_BY }}</td>
+										        	<td>{{ $dat->REQ_STATUS }}</td>
+										        	
 										        	<td>{{ $dat->REQ_ACTION_DATE }}</td>
-										        	<td>{{ $dat->REMARKS }}</td>
+										        	<td>
+										        		<button type="button" class="btn btn-sm btn-default btn-block" data-toggle="modal" data-target= {{ '#AckSlp'.$dat->REQ_NO }} >View</button>
+										        	</td>										      	
+											      	<div class="modal fade" id= {{ 'AckSlp'.$dat->REQ_NO }} role="dialog">
+														<div class="modal-dialog modal-lg">
+															<div class="modal-content">
+																<div class="modal-header">
+														   			<button type="button" class="close" data-dismiss="modal">&times;</button>
+														   			<h4 class="modal-title" style="text-align: center;"><b>Acknowledgement Slip</b></h4>
+														   		</div>
+														   		<div class="modal-body">
+																	<div class="row">
+																		<div class="col-md-6">
+																			<b>Date:</b> {{ substr($dat->EntryDate,0,10) }}
+																		</div>
+																		<div class="col-md-6">
+																			<b>Time:</b> {{ substr($dat->EntryDate,11,8) }}
+																		</div>
+																	</div><br>
+																	<div class="row">
+																		<div class="col-md-6">
+																			<b>Refrence No.:</b>
+																		</div>
+																		<div class="col-md-6">
+																			<b>Name:</b> {{ $dat->REQUESTEDBY }}
+																		</div>
+																	</div><br>
+																	<div class="row">
+																		<div class="col-md-6">
+																			<b>Service No.:</b> {{ $dat->REQ_NO }}
+																		</div>
+																		<div class="col-md-6">
+																			<b>Address:</b>
+																		</div>
+																	</div><br>
+																	<div class="row">
+																		<div class="col-md-6">
+																			<b>Complaint Type:</b> {{ $dat->SERVICE_TYPE_NAME }}
+																		</div>
+																		<div class="col-md-6">
+																			<b>Sub Type:</b> {{ $dat->SERVICE_TYPE_GROUP_NAME }}
+																		</div>
+																	</div><br>
+																	<div class="row">
+																		<div class="col-md-12">
+																			<b>Remark:</b> {{ $dat->REMARKS }}
+																		</div>	
+																	</div><br>
+																	<div class="row">
+																		<div class="col-md-3"></div>
+																		<div class="col-md-3"></div>
+																		<div class="col-md-3"></div>
+																		<div class="col-md-3">
+																			<img src="{{ URL::asset('images/logo.png') }}" class="img-responsive">
+																		</div>
+																	</div>
+														   		</div>
+														   		<div class="modal-footer">
+														   			<button type="button" class="btn btn-danger">DOWNLOAD</button>
+														   			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+														  		</div>
+															</div>
+														</div>
+													</div>
 										      	</tr>
 										      	@endforeach
 										    </tbody>
@@ -91,6 +152,9 @@
 					</div>
 				</div>
 			</div>
+
+			
+
 		</div>
 
 <script>
