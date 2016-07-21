@@ -162,7 +162,7 @@ class ApiDocController extends Controller
             $CONS_ACC = $dat->CONS_ACC;
         }
         $service_conn = \DB::connection('sqlsrv_SERVICE');
-        $data=$service_conn->table('CC_REQ_MAS')->join('CC_SERVICE_TYPE_MAS','CC_REQ_MAS.SERVICE_TYPE_ID','=','CC_SERVICE_TYPE_MAS.SERVICE_TYPE_ID')->join('CC_SERVICE_TYPE_GROUP_MAS','CC_SERVICE_TYPE_GROUP_MAS.SERVICE_TYPE_GROUP_ID','=','CC_SERVICE_TYPE_MAS.SERVICE_TYPE_GROUP_ID')->where('CONS_ACC',$CONS_ACC)->get();
+        $data=$service_conn->table('CC_REQ_MAS')->join('CC_SERVICE_TYPE_MAS','CC_REQ_MAS.SERVICE_TYPE_ID','=','CC_SERVICE_TYPE_MAS.SERVICE_TYPE_ID')->join('CC_SERVICE_TYPE_GROUP_MAS','CC_SERVICE_TYPE_GROUP_MAS.SERVICE_TYPE_GROUP_ID','=','CC_SERVICE_TYPE_MAS.SERVICE_TYPE_GROUP_ID')->join('CC_REQ_STAT_MAS','CC_REQ_MAS.REQ_STATUS_ID','=','CC_REQ_STAT_MAS.REQ_STATUS_ID')->where('CONS_ACC',$CONS_ACC)->get();
         return response()->json(['Info' => $data]);
     }
 

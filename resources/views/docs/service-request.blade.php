@@ -69,7 +69,7 @@
 										    	@foreach($data as $dat)
 										      	<tr style="font-size: 12px;">
 										        	<td>{{ $dat->REQ_NO }}</td>
-										        	<td>{{ $dat->SERVICE_TYPE_GROUP_NAME }} > {{ $dat->SERVICE_TYPE_NAME }}</td>
+										        	<td>{{ $dat->SERVICE_TYPE_GROUP_NAME }} - {{ $dat->SERVICE_TYPE_NAME }}</td>
 										        	<td>{{ $dat->REQUESTEDBY }}</td>
 										        	<td>{{ $dat->REQUESTER_MOBILENO }}</td>
 										        	<td>{{ $dat->REQ_ACTION_BY }}</td>
