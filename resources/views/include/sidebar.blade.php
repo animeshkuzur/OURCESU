@@ -6,8 +6,8 @@
 				
 				<li><a data-toggle="collapse" data-parent="#accordion1" href="#meter">Metering<span class="glyphicon glyphicon-chevron-down"></span></a>
 					<ul id="meter" class="collapse">
-	                    <li><a href="#">Meter Protocol Sheet</a></li>
-	                    <li><a href="#">Seal Replacement Protocol</a></li>
+	                    <li><a href="{{ url('/dashboard/meter-protocol') }}">Meter Protocol Sheet</a></li>
+	                    <li><a href="{{ url('/dashboard/seal-replacement') }}">Seal Replacement Protocol</a></li>
 	                    <li><a href="#">Meter Change Notice</a></li>
                		</ul>
 				</li>

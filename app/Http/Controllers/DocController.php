@@ -188,4 +188,12 @@ class DocController extends Controller
 
         return view('docs.feedback');
     }
+
+    public function meterprotocol(){
+        return view('docs.meter-protocol');
+    }
+
+    public function sealreplacement(){
+        return view('docs.seal-replacement');
+    }
 }
