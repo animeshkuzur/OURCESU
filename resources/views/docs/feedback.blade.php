@@ -29,15 +29,16 @@
 						</div>
 						<div class="row">
 							<div class="col-md-12">
-								{!! Form::open(array('route' => '', 'method'=>'POST')) !!}
+								
 								
 								<div class="form-group">
-								{!! Form::textarea('feedback', array('class' => 'form-control','rows'=>'5')); !!}
+									<textarea class="form-control" rows="8" placeholder="Your Feedback..."></textarea>
 								</div>
 								
 								<div class="form-group">
-								{!! Form::submit('SUBMIT',array('class' => 'btn btn-primary','name'=>'submit')) !!}
+									<a href="#" class="btn btn-primary">SUBMIT</a>
 								</div>
+								
 							</div>
 						</div>
 					</div>
