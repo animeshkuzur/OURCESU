@@ -8,7 +8,7 @@
 					<ul id="meter" class="collapse">
 	                    <li><a href="{{ url('/dashboard/meter-protocol') }}">Meter Protocol Sheet</a></li>
 	                    <li><a href="{{ url('/dashboard/seal-replacement') }}">Seal Replacement Protocol</a></li>
-	                    <li><a href="#">Meter Change Notice</a></li>
+	                    <li><a href="{{ url('/dashboard/meter-change') }}">Meter Change Notice</a></li>
                		</ul>
 				</li>
 				<li><a data-toggle="collapse" data-parent="#accordion1" href="#bills">Billing<span class="glyphicon glyphicon-chevron-down"></span></a>
