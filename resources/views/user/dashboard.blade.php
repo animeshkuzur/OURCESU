@@ -69,7 +69,7 @@
 
 				<div class="row">
 					<div class="col-md-3">
-						<a class="btn btn-lg btn-primary btn-block shcut" href="#">
+						<a class="btn btn-lg btn-primary btn-block shcut" href="{{ url('/dashboard/feedbacks')}}">
 						<span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;&nbsp;&nbsp;Feedback 
 						</a>					
 					</div>
