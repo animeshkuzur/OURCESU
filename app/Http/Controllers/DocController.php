@@ -196,4 +196,8 @@ class DocController extends Controller
     public function sealreplacement(){
         return view('docs.seal-replacement');
     }
+
+    public function meterchange(){
+        return view('docs.meter-change');
+    }
 }

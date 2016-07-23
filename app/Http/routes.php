@@ -42,6 +42,7 @@ Route::get('/dashboard/service-request',['middleware'=>'auth','as'=>'servicerequ
 Route::get('/dashboard/feedbacks',['middleware'=>'auth','as'=>'feedbacks','uses'=>'DocController@feedbacks']);
 Route::get('/dashboard/meter-protocol',['middleware'=>'auth','as'=>'meterprotocol','uses'=>'DocController@meterprotocol']);
 Route::get('/dashboard/seal-replacement',['middleware'=>'auth','as'=>'sealreplacement','uses'=>'DocController@sealreplacement']);
+Route::get('/dashboard/meter-change',['middleware'=>'auth','as'=>'meterchange','uses'=>'DocController@meterchange']);
 
 Route::group(['prefix'=>'api'],function(){
 	Route::post('/login', ['uses'=>'ApiAuthController@apilogin']);
