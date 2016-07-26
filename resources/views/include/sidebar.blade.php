@@ -29,7 +29,7 @@
 					<ul id="comp" class="collapse">
 	                    <li><a href="{{url('/dashboard/inspection-report')}}">Inspection Report</a></li>
 	                    <li><a href="{{url('/dashboard/provisional-ass')}}">Provisional Assessment</a></li>
-	                    <li><a href="#">Final Assessment</a></li>
+	                    <li><a href="{{url('/dashboard/final-ass')}}">Final Assessment</a></li>
                		</ul>
 				</li>
 				<li><a href="{{ url('/dashboard/service-request') }}">Service Requested<span class="glyphicon glyphicon-chevron-right"></span></a>

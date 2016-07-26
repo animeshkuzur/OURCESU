@@ -45,6 +45,7 @@ Route::get('/dashboard/seal-replacement',['middleware'=>'auth','as'=>'sealreplac
 Route::get('/dashboard/meter-change',['middleware'=>'auth','as'=>'meterchange','uses'=>'DocController@meterchange']);
 Route::get('/dashboard/inspection-report',['middleware'=>'auth','as'=>'inspectionreport','uses'=>'DocController@inspectionreport']);
 Route::get('/dashboard/provisional-ass',['middleware'=>'auth','as'=>'provisionalass','uses'=>'DocController@provisionalass']);
+Route::get('/dashboard/final-ass',['middleware'=>'auth','as'=>'finalass','uses'=>'DocController@finalass']);
 
 Route::group(['prefix'=>'api'],function(){
 	Route::post('/login', ['uses'=>'ApiAuthController@apilogin']);

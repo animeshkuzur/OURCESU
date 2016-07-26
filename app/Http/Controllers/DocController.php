@@ -208,4 +208,8 @@ class DocController extends Controller
     public function provisionalass(){
         return view('docs.provisional-ass');
     }
+
+    public function finalass(){
+        return view('docs.final-ass');
+    }
 }
