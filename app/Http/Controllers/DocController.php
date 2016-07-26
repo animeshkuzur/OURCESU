@@ -200,4 +200,12 @@ class DocController extends Controller
     public function meterchange(){
         return view('docs.meter-change');
     }
+
+    public function inspectionreport(){
+        return view('docs.inspection-report');
+    }
+
+    public function provisionalass(){
+        return view('docs.provisional-ass');
+    }
 }

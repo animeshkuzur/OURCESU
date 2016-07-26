@@ -30,7 +30,7 @@
 			height: 20px;
 			width: 20px;
 		}
-	</style>
+</style>
 <div class="container-b">
 	<div class="row">
 		<div class="col-xs-2">

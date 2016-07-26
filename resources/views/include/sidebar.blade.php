@@ -27,8 +27,8 @@
 				</li>
 				<li><a data-toggle="collapse" data-parent="#accordion1" href="#comp">Compliance Lists<span class="glyphicon glyphicon-chevron-down"></span></a>
 					<ul id="comp" class="collapse">
-	                    <li><a href="#">Inspection Report</a></li>
-	                    <li><a href="#">Provisional Assessment form</a></li>
+	                    <li><a href="{{url('/dashboard/inspection-report')}}">Inspection Report</a></li>
+	                    <li><a href="{{url('/dashboard/provisional-ass')}}">Provisional Assessment</a></li>
 	                    <li><a href="#">Final Assessment</a></li>
                		</ul>
 				</li>

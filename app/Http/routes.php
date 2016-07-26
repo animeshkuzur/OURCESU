@@ -43,6 +43,8 @@ Route::get('/dashboard/feedbacks',['middleware'=>'auth','as'=>'feedbacks','uses'
 Route::get('/dashboard/meter-protocol',['middleware'=>'auth','as'=>'meterprotocol','uses'=>'DocController@meterprotocol']);
 Route::get('/dashboard/seal-replacement',['middleware'=>'auth','as'=>'sealreplacement','uses'=>'DocController@sealreplacement']);
 Route::get('/dashboard/meter-change',['middleware'=>'auth','as'=>'meterchange','uses'=>'DocController@meterchange']);
+Route::get('/dashboard/inspection-report',['middleware'=>'auth','as'=>'inspectionreport','uses'=>'DocController@inspectionreport']);
+Route::get('/dashboard/provisional-ass',['middleware'=>'auth','as'=>'provisionalass','uses'=>'DocController@provisionalass']);
 
 Route::group(['prefix'=>'api'],function(){
 	Route::post('/login', ['uses'=>'ApiAuthController@apilogin']);
