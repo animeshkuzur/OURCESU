@@ -42,40 +42,64 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $count = 0;
         $this->validate($request, User::$register_validation_rules);
-        $data=$request->only('name','lname','email','password','CONT_ACC','phone','password_confirmation');
         $stl_conn = \DB::connection('sqlsrv_STL');
-        $USER_DATA = $stl_conn->table('BILLING_OUTPUT_'.date('Y'))->where('CONTRACT_ACC', $data['CONT_ACC'])->limit(1)->get();
-        if(!empty($USER_DATA)){
-            if($data['password']==$data['password_confirmation']){
-            $data['password'] = bcrypt($data['password']);
-            /*$user = User::create([
-                'name' => $data['name'],
-                'email' => $data['email'],
-                'password' => $data['password'],
-                'CONT_ACC' => $data['CONT_ACC'],
-                ]);*/
-            $user=\DB::table('users')->insert([
-                'name' => $data['name']." ".$data['lname']." ",
-                'email' => $data['email'],
-                'password' => $data['password'],
-                'CONT_ACC' => $data['CONT_ACC'],
-                'phone' => $data['phone'],
-                'updated_at' => \Carbon\Carbon::now(),
-                'created_at'=>\Carbon\Carbon::now(),
-                ]);
-                if($user){
-                    return redirect()->route('login');
-                }
+        $contacc = $request->get('CONT_ACC');
+        $data=$request->only('name','lname','email','password','phone','password_confirmation');
+        foreach ($contacc as $accnos) {
+            $count=$count+1;
+            if(empty($accnos)){
+                return back()->withInput()->withErrors(['CONT_ACC' => 'Contract Account Number ' +$count+ ' is missing']);
             }
             else{
-            return back()->withInput()->withErrors(['email' => 'Confirmation password did not match']);
+                $USER_DATA = $stl_conn->table('BILLING_OUTPUT_'.date('Y'))->where('CONTRACT_ACC', $accnos)->limit(1)->get();
+                if(empty($USER_DATA)){
+                    return back()->withInput()->withErrors(['CONT_ACC' => 'Contract Account Number '+$count+' does not exist']);
+                }
             }
         }
+        if($data['password']==$data['password_confirmation']){
+        $data['password'] = bcrypt($data['password']);
+        $user=\DB::table('users')->insert([
+            'name' => $data['name']." ".$data['lname']." ",
+            'email' => $data['email'],
+            'password' => $data['password'],
+            'CONT_ACC' => "NULL",
+            'phone' => $data['phone'],
+            'updated_at' => \Carbon\Carbon::now(),
+            'created_at'=>\Carbon\Carbon::now(),
+            ]);
+        }
         else{
-            return back()->withInput()->withErrors(['CONT_ACC' => 'No such Contract Account Number exist']);
+            return back()->withInput()->withErrors(['email' => 'Confirmation password did not match']);
         }
 
+        $user_id = \DB::table('users')->where('email',$data['email'])->get();
+        foreach ($user_id as $id) {
+            $u_id = $id->id;
+        }
+        foreach ($contacc as $accno) {
+            $U_DATA = $stl_conn->table('BILLING_INPUT_'.date('Y'))->where('CONTRACT_ACC', $accno)->limit(1)->get();
+            foreach ($U_DATA as $DAT) {
+                $user_details = \DB::table('users_details')->insert([
+                'DIVCODE' => $DAT->DivCode,
+                'DIVISION' => $DAT->DIVISION,
+                'CONTRACT_ACC' => $DAT->CONTRACT_ACC,
+                'CONSUMER_ACC' => $DAT->CONS_ACC,
+                'METER_NO' => $DAT->METER_NO,
+                'METER_TYPE' => $DAT->METER_TYPE,
+                'ADD1' => $DAT->CONS_ADD1,
+                'ADD2' => $DAT->CONS_ADD2,
+                'ADD3' => $DAT->CONS_ADD3,
+                'ADD4' => $DAT->CONS_ADD4,
+                'VILL_CODE' => $DAT->VILL_CODE,
+                'users_id' => $u_id,
+                ]);
+            }
+                            
+        }
+        return redirect()->route('login'); 
     }
 
     /**
@@ -184,34 +208,82 @@ class UserController extends Controller
 
     public function apiregister(Request $request){
         try{
-            $data=$request->only('name','lname','email','password','CONT_ACC','phone');
+            $count=0;
+            $contacc = $request->get('CONT_ACC');
+            $data=$request->only('name','lname','email','password','phone');
             $data['password'] = bcrypt($data['password']);
             $stl_conn = \DB::connection('sqlsrv_STL');
-            $USER_DATA = $stl_conn->table('BILLING_OUTPUT_'.date('Y'))->where('CONTRACT_ACC', $data['CONT_ACC'])->limit(1)->get();
-            if(!empty($USER_DATA)){
+            foreach ($contacc as $accnos) {
+                $count=$count+1;            
+                $USER_DATA = $stl_conn->table('BILLING_OUTPUT_'.date('Y'))->where('CONTRACT_ACC', $accnos)->limit(1)->get();
+                if(empty($USER_DATA)){
+                    return response()->json(['errorInfo' => 'Contract Account Number '+$count+' exist'], 401);
+                }
+            }
                 $user=\DB::table('users')->insert([
                     'name' => $data['name']." ".$data['lname']." ",
                     'email' => $data['email'],
                     'password' => $data['password'],
-                    'CONT_ACC' => $data['CONT_ACC'],
+                    'CONT_ACC' => "NULL",
                     'phone' => $data['phone'],
                     'updated_at' => \Carbon\Carbon::now(),
                     'created_at'=>\Carbon\Carbon::now(),
                     ]);
 
+                $user_id = \DB::table('users')->where('email',$data['email'])->get();
+                foreach ($user_id as $id) {
+                    $u_id = $id->id;
+                }
+                foreach ($contacc as $accno) {
+                    $U_DATA = $stl_conn->table('BILLING_INPUT_'.date('Y'))->where('CONTRACT_ACC', $accno)->limit(1)->get();
+                    foreach ($U_DATA as $DAT) {
+                        $user_details = \DB::table('users_details')->insert([
+                        'DIVCODE' => $DAT->DivCode,
+                        'DIVISION' => $DAT->DIVISION,
+                        'CONTRACT_ACC' => $DAT->CONTRACT_ACC,
+                        'CONSUMER_ACC' => $DAT->CONS_ACC,
+                        'METER_NO' => $DAT->METER_NO,
+                        'METER_TYPE' => $DAT->METER_TYPE,
+                        'ADD1' => $DAT->CONS_ADD1,
+                        'ADD2' => $DAT->CONS_ADD2,
+                        'ADD3' => $DAT->CONS_ADD3,
+                        'ADD4' => $DAT->CONS_ADD4,
+                        'VILL_CODE' => $DAT->VILL_CODE,
+                        'users_id' => $u_id,
+                        ]);
+                    }
+                                    
+                }
+
                 if($user){
                     return response()->json(['Info' => 'user_registered'], 200);
                 }
+                else
                 return response()->json(['errorInfo' => 'credentials_exists'], 401);
-            }
-            else{
-                return response()->json(['errorInfo' => 'No such Contract Account Number exist'], 401);
-            }
         }
         catch(\Illuminate\Database\QueryException $ex){
             return response()->json($ex);
         }
     }
 
+    public function selectacc(){
+        if(\Auth::check()){
+            $id=\Auth::user()->id;
+            $data = \DB::table('users_details')->where('users_id',$id)->get();
+            return view('user.select-acc',['data'=>$data]);
+        }
+        return redirect()->route('login');
+    }
+
+    public function selectedacc(Request $request){
+        $data=$request->only('CONT_ACC');
+        if(\Auth::check()){
+            $id=\Auth::user()->id;
+            $ch=\DB::table('users')->where('id', \Auth::user()->id)->update(['CONT_ACC' => $data['CONT_ACC']]);
+            if($ch){
+                return redirect()->route('dashboard');
+            }
+        }
+    }
 
 }

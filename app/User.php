@@ -48,7 +48,6 @@ class User extends Model implements AuthenticatableContract,
         'email' => 'required|email|Unique:users',
         'password' => 'required|min:8',
         'password_confirmation' => 'required',
-        'CONT_ACC' => 'required|Unique:users|AlphaNum',
         'phone' => 'required|Unique:users|max:10'
     ];
 

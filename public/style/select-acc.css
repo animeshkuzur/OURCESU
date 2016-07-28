@@ -1,0 +1,13 @@
+body{
+	padding-top: 0px;
+	background: #f8f8f8;	
+}
+.tabs{
+	background: white;
+	border: 1px solid gray;
+	border-radius: 5px;
+	width: auto;
+	text-align: center;
+	padding: 5px;
+	margin: 5px; 
+}

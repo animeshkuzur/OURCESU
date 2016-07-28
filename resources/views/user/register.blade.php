@@ -52,11 +52,23 @@
 					</div>
 					<br>
 					<div class="row">
-						<div class="col-md-6">
-							{!! Form::text('CONT_ACC', null, array('class' => 'form-control','placeholder'=>'CONTRACT ACCOUNT NUMBER')) !!}
+						<div class="col-md-6" id="cont_acc1">
+							{!! Form::text('CONT_ACC[]', null, array('class' => 'form-control','placeholder'=>'CONTRACT ACCOUNT NUMBER')) !!}
 						</div>
 						<div class="col-md-6">
 							{!! Form::text('phone', null, array('class' => 'form-control','placeholder'=>'Mobile No.')) !!}
+						</div>
+					</div>
+					<br>
+					<div id="cont_acc">
+						
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-md-12">
+							<button type="button" id="addBtn" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;CONTRACT ACC</button>
+
+							<button type="button" id="removeBtn" class="btn btn-default"><span class="glyphicon glyphicon-minus"></span>&nbsp;&nbsp;REMOVE CONTRACT ACC</button>
 						</div>
 					</div>
 					<br><br>
@@ -80,4 +92,45 @@
 		<div class="col-md-2 content">
 			
 		</div>
+
+		<script type="text/javascript">
+
+			$(document).ready(function(){
+
+			    var counter = 2;
+					
+			    $("#addBtn").click(function () {
+							
+				if(counter>10){
+			            alert("Only 10 textboxes allow");
+			            return false;
+				}   
+					
+				var newTextBoxDiv = $(document.createElement('div'))
+				     .attr({id : 'cont_acc' + counter,
+				 			class: "row"});
+			                
+				newTextBoxDiv.after().html('<div class="col-md-6"><input class="form-control" placeholder="CONTRACT ACCOUNT NUMBER '+counter+'" name="CONT_ACC[]" type="text"></div>');
+			            
+				newTextBoxDiv.appendTo("#cont_acc");
+
+							
+				counter++;
+			    });
+
+			     $("#removeBtn").click(function () {
+				if(counter==2){
+			          alert("No more textbox to remove");
+			          return false;
+			       }   
+			        
+				counter--;
+						
+			        $("#cont_acc" + counter).remove();
+						
+			    });
+					
+
+			});
+		</script>
 @endsection

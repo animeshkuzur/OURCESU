@@ -17,9 +17,10 @@ Route::get('/', function () {
 
 Route::get('/login' ,['as' => 'login', 'uses' => 'AuthController@login']);
 Route::post('/loginvalidate' ,['as' => 'loginvalidate', 'uses' => 'AuthController@loginvalidate']);
-
 Route::resource('user','UserController',['only'=>['create','store']]);
 
+Route::get('/select-acc',['middleware' => 'auth','as' => 'select-acc','uses'=>'UserController@selectacc']);
+Route::post('/selected-acc',['middleware' => 'auth','as' => 'selected-acc','uses'=>'UserController@selectedacc']);
 Route::get('/dashboard',['middleware' => 'auth', 'as'=>'dashboard','uses'=>'UserController@dashboard']);
 Route::get('/logout',['as'=>'logout','uses'=>'AuthController@logout']);
 Route::get('/dashboard/settings',['middleware' => 'auth', 'as'=>'settings','uses'=>'UserController@settings']);
@@ -46,6 +47,7 @@ Route::get('/dashboard/meter-change',['middleware'=>'auth','as'=>'meterchange','
 Route::get('/dashboard/inspection-report',['middleware'=>'auth','as'=>'inspectionreport','uses'=>'DocController@inspectionreport']);
 Route::get('/dashboard/provisional-ass',['middleware'=>'auth','as'=>'provisionalass','uses'=>'DocController@provisionalass']);
 Route::get('/dashboard/final-ass',['middleware'=>'auth','as'=>'finalass','uses'=>'DocController@finalass']);
+
 
 Route::group(['prefix'=>'api'],function(){
 	Route::post('/login', ['uses'=>'ApiAuthController@apilogin']);

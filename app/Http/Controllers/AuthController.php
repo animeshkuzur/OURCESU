@@ -95,6 +95,8 @@ class AuthController extends Controller
     }
 
     public function loginvalidate(Request $request){
+        $count = 0;
+        $cont_acc = "";
         $this->validate($request, User::$login_validation_rules);
         $data = $request->only('email','password');
         $remember = $request->only('remember');
@@ -103,7 +105,19 @@ class AuthController extends Controller
         else
             $flag = false;
         if(\Auth::attempt($data, $flag)){
-            return redirect()->intended('dashboard');
+            $id=\Auth::user()->id;
+            $user_data = \DB::table('users_details')->where('users_id',$id)->get();
+            foreach ($user_data as $user_dat) {
+                $count=$count+1;
+                $cont_acc = $user_dat->CONTRACT_ACC;
+            }
+            if($count>1){
+               return redirect()->route('select-acc'); 
+            }
+            else{
+                \DB::table('users')->where('id',$id)->update(['CONT_ACC' => $cont_acc]);
+                return redirect()->route('dashboard');
+            }
         }
         else
             return back()->withInput()->withErrors(['email' => 'Username or password is invalid']);
