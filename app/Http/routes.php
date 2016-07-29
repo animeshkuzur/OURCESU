@@ -62,6 +62,8 @@ Route::group(['prefix'=>'api'],function(){
 	Route::get('/apiemobilereceipt',['uses' => 'ApiDocController@apiemobilereceipt']);
 	Route::get('/apimoneyreceipt',['uses' => 'ApiDocController@apimoneyreceipt']);
 	Route::get('/getservicereq',['uses' => 'ApiDocController@getservicereq']);
+	Route::get('/selectacc',['uses' => 'ApiAuthController@apiselectacc']);
+	Route::get('/addcontacc',['uses' => 'ApiUserController@addcontacc']);
 });
 
 

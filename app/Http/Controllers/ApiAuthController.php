@@ -88,6 +88,7 @@ class ApiAuthController extends Controller
     }
 
     public function apilogin(Request $request){
+        $count=0;
         $data = $request->only('email','password');
         try {
             // verify the credentials and create a token for the user
@@ -99,15 +100,27 @@ class ApiAuthController extends Controller
             // something went wrong
             return response()->json(['errorInfo' => 'could_not_create_token'], 500);
         }
+
         $users = \DB::select('select * from users where email = :email',['email'=>$data['email']]);       
         foreach ($users as $user) {
             $id = $user->id; $name = $user->name; $email = $user->email; $CONT_ACC = $user->CONT_ACC; $phone = $user->phone;
         }
 
+        $user_data = \DB::table('users_details')->where('users_id',$id)->get();
+        foreach ($user_data as $user_dat) {
+            $count=$count+1;
+            $cont_acc = $user_dat->CONTRACT_ACC;
+        }
+        if($count>1){
+            return response()->json(['Info' => $user_data,'token' => $token], 200);; 
+        }
+
         $stl_conn = \DB::connection('sqlsrv_STL');
-        $data = $stl_conn->table('BILLING_OUTPUT_'.date('Y'))->where('CONTRACT_ACC', $CONT_ACC)->orderBy('BillMonth', 'asc')->get();
+        $data = \DB::table('users_details')->where('users_id',$id)->limit(1)->get();
         foreach($data as $dat){
             $cons_acc = $dat->CONS_ACC; $divcode = $dat->DivCode; $division = $dat->DIVISION; $meter_no = $dat->METER_NO;
+            $meter_type = $dat->METER_TYPE; $add1 = $dat->CONS_ADD1; $add2 = $dat->CONS_ADD2; $add3 = $dat->CONS_ADD3;
+            $add4 = $dat->CONS_ADD4; $vill_code = $dat->VILL_CODE;
         }
         
         // if no errors are encountered we can return a JWT
@@ -120,6 +133,12 @@ class ApiAuthController extends Controller
                                 'DivCode' => $divcode,
                                 'DIVISION' => $division,
                                 'METER_NO' => $meter_no,
+                                'METER_TYPE' => $meter_type,
+                                'ADD1' => $add1,
+                                'ADD2' => $add2,
+                                'ADD3' => $add3,
+                                'ADD4' => $add4,
+                                'VILL_CODE' => $vill_code,
                                 'token' => $token,
                                 ]);
 
@@ -173,6 +192,54 @@ class ApiAuthController extends Controller
             return response()->json(['errorInfo' => 'Not able to refresh Token']);
         }
         
+    }
+
+    public function apiselectacc(Request $request){
+        try {
+            if (!$user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['errorInfo' => 'user_not_found'], 404);
+            }            
+        } 
+        catch (\Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
+            return response()->json(['errorInfo' => 'token_expired'], $e->getStatusCode());
+        } 
+        catch (\Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
+            return response()->json(['errorInfo' => 'token_invalid'], $e->getStatusCode());
+        } 
+        catch (\Tymon\JWTAuth\Exceptions\JWTException $e) {
+            return response()->json(['errorInfo' => 'token_absent'], $e->getStatusCode());
+        }
+        catch(\Illuminate\Database\QueryException $e){
+            return response()->json(['errorInfo'=> $ex]);
+        }
+        $cont_acc = $request->only('CONT_ACC');
+        $users = \DB::table('users')->where('CONT_ACC',$cont_acc)->limit(1)->get();
+        foreach ($users as $user) {
+            $id = $user->id; $name = $user->name; $email = $user->email; $CONT_ACC = $user->CONT_ACC; $phone = $user->phone;
+        }
+        $data = \DB::table('users_details')->where('CONTRACT_ACC',$cont_acc)->limit(1)->get();
+        foreach($data as $dat){
+            $cons_acc = $dat->CONSUMER_ACC; $divcode = $dat->DivCode; $division = $dat->DIVISION; $meter_no = $dat->METER_NO;
+            $meter_type = $dat->METER_TYPE; $add1 = $dat->ADD1; $add2 = $dat->ADD2; $add3 = $dat->ADD3;
+            $add4 = $dat->ADD4; $vill_code = $dat->VILL_CODE;
+        }
+
+        return response()->json(['id'=>$id,
+                            'name' => $name,
+                            'email' => $email,
+                            'CONT_ACC' => $CONT_ACC,
+                            'phone' => $phone,
+                            'CONS_ACC' => $cons_acc,
+                            'DivCode' => $divcode,
+                            'DIVISION' => $division,
+                            'METER_NO' => $meter_no,
+                            'METER_TYPE' => $meter_type,
+                            'ADD1' => $add1,
+                            'ADD2' => $add2,
+                            'ADD3' => $add3,
+                            'ADD4' => $add4,
+                            'VILL_CODE' => $vill_code,
+                            ]);
     }
 
 }

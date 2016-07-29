@@ -160,9 +160,7 @@ class ApiUserController extends Controller
         try {
             if (!$user = JWTAuth::parseToken()->authenticate()) {
                 return response()->json(['errorInfo' => 'user_not_found'], 404);
-            }
-
-            
+            }            
         } 
         catch (\Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
             return response()->json(['errorInfo' => 'token_expired'], $e->getStatusCode());
@@ -187,4 +185,31 @@ class ApiUserController extends Controller
             return response()->json(['errorInfo' => 'invalid_credentials', 401]);
         }
     }
+
+    public function addcontacc(Request $request){
+        try {
+            if (!$user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['errorInfo' => 'user_not_found'], 404);
+            }
+            
+        } 
+        catch (\Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
+            return response()->json(['errorInfo' => 'token_expired'], $e->getStatusCode());
+        } 
+        catch (\Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
+            return response()->json(['errorInfo' => 'token_invalid'], $e->getStatusCode());
+        } 
+        catch (\Tymon\JWTAuth\Exceptions\JWTException $e) {
+            return response()->json(['errorInfo' => 'token_absent'], $e->getStatusCode());
+        }
+        catch(\Illuminate\Database\QueryException $e){
+            return response()->json(['errorInfo'=> $ex]);
+        }
+        $data = $request->only('CONT_ACC');
+        $id = $user->id;
+        \DB::table('users_details')->where('CONT', $user->id)->update(['name' => $data['name'],'phone' => $data['phone']]);
+        $user = JWTAuth::parseToken()->authenticate();
+        return response()->json(compact('user'));
+    }
+
 }
