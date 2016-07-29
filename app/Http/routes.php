@@ -47,6 +47,7 @@ Route::get('/dashboard/meter-change',['middleware'=>'auth','as'=>'meterchange','
 Route::get('/dashboard/inspection-report',['middleware'=>'auth','as'=>'inspectionreport','uses'=>'DocController@inspectionreport']);
 Route::get('/dashboard/provisional-ass',['middleware'=>'auth','as'=>'provisionalass','uses'=>'DocController@provisionalass']);
 Route::get('/dashboard/final-ass',['middleware'=>'auth','as'=>'finalass','uses'=>'DocController@finalass']);
+Route::post('/dashboard/addcontacc',['middleware' => 'auth','as' => 'addcontacc','uses'=>'UserController@addcontacc']);
 
 
 Route::group(['prefix'=>'api'],function(){
