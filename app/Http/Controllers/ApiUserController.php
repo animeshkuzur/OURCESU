@@ -205,11 +205,36 @@ class ApiUserController extends Controller
         catch(\Illuminate\Database\QueryException $e){
             return response()->json(['errorInfo'=> $ex]);
         }
-        $data = $request->only('CONT_ACC');
+        $cont_acc = $request->only('CONT_ACC');
         $id = $user->id;
-        \DB::table('users_details')->where('CONT', $user->id)->update(['name' => $data['name'],'phone' => $data['phone']]);
-        $user = JWTAuth::parseToken()->authenticate();
-        return response()->json(compact('user'));
+        $stl_conn = \DB::connection('sqlsrv_STL');
+        $USER_DATA = $stl_conn->table('BILLING_OUTPUT_'.date('Y'))->where('CONTRACT_ACC', $cont_acc)->limit(1)->get();
+        if(empty($USER_DATA)){
+            return response()->json(['errorInfo' => 'Contract Account Number does not exist'], 401);
+        }
+        $data = $stl_conn->table('BILLING_INPUT_'.date('Y'))->where('CONTRACT_ACC', $cont_acc)->limit(1)->get();
+        foreach ($data as $dat) {
+            $cons_acc = $dat->CONS_ACC; $divcode = $dat->DivCode; $division = $dat->DIVISION; $meter_no = $dat->METER_NO;
+            $meter_type = $dat->METER_TYPE; $add1 = $dat->CONS_ADD1; $add2 = $dat->CONS_ADD2; $add3 = $dat->CONS_ADD3;
+            $add4 = $dat->CONS_ADD4; $vill_code = $dat->VILL_CODE;
+        }
+        $user_details = \DB::table('users_details')->insert([
+                        'DIVCODE' => $divcode,
+                        'DIVISION' => $division,
+                        'CONTRACT_ACC' => $cont_acc,
+                        'CONSUMER_ACC' => $cons_acc,
+                        'METER_NO' => $meter_no,
+                        'METER_TYPE' => $meter_type,
+                        'ADD1' => $add1,
+                        'ADD2' => $add2,
+                        'ADD3' => $add3,
+                        'ADD4' => $add4,
+                        'VILL_CODE' => $vill_code,
+                        'users_id' => $id,
+                        ]);
+        if($user_details){
+            return response()->json(['Info' => 'Contract Account Number Added']);
+        }
     }
 
 }

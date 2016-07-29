@@ -217,7 +217,7 @@ class UserController extends Controller
                 $count=$count+1;            
                 $USER_DATA = $stl_conn->table('BILLING_OUTPUT_'.date('Y'))->where('CONTRACT_ACC', $accnos)->limit(1)->get();
                 if(empty($USER_DATA)){
-                    return response()->json(['errorInfo' => 'Contract Account Number '+$count+' exist'], 401);
+                    return response()->json(['errorInfo' => 'Contract Account Number '+$count+' does not exist'], 401);
                 }
             }
                 $user=\DB::table('users')->insert([
