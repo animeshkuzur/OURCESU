@@ -212,11 +212,9 @@ class ApiUserController extends Controller
         if(empty($USER_DATA)){
             return response()->json(['errorInfo' => 'Contract Account Number does not exist'], 401);
         }
-        $data = $stl_conn->table('BILLING_INPUT_'.date('Y'))->where('CONTRACT_ACC', $cont_acc)->limit(1)->get();
+        $data = $stl_conn->table('BILLING_OUTPUT_'.date('Y'))->where('CONTRACT_ACC', $cont_acc)->limit(1)->get();
         foreach ($data as $dat) {
             $cons_acc = $dat->CONS_ACC; $divcode = $dat->DivCode; $division = $dat->DIVISION; $meter_no = $dat->METER_NO;
-            $meter_type = $dat->METER_TYPE; $add1 = $dat->CONS_ADD1; $add2 = $dat->CONS_ADD2; $add3 = $dat->CONS_ADD3;
-            $add4 = $dat->CONS_ADD4; $vill_code = $dat->VILL_CODE;
         }
         $user_details = \DB::table('users_details')->insert([
                         'DIVCODE' => $divcode,
@@ -224,12 +222,12 @@ class ApiUserController extends Controller
                         'CONTRACT_ACC' => $cont_acc,
                         'CONSUMER_ACC' => $cons_acc,
                         'METER_NO' => $meter_no,
-                        'METER_TYPE' => $meter_type,
-                        'ADD1' => $add1,
-                        'ADD2' => $add2,
-                        'ADD3' => $add3,
-                        'ADD4' => $add4,
-                        'VILL_CODE' => $vill_code,
+                        'METER_TYPE' => "NULL",
+                        'ADD1' => "NULL",
+                        'ADD2' => "NULL",
+                        'ADD3' => "NULL",
+                        'ADD4' => "NULL",
+                        'VILL_CODE' => "NULL",
                         'users_id' => $id,
                         ]);
         if($user_details){

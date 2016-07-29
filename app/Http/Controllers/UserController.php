@@ -80,7 +80,7 @@ class UserController extends Controller
             $u_id = $id->id;
         }
         foreach ($contacc as $accno) {
-            $U_DATA = $stl_conn->table('BILLING_INPUT_'.date('Y'))->where('CONTRACT_ACC', $accno)->limit(1)->get();
+            $U_DATA = $stl_conn->table('BILLING_OUTPUT_'.date('Y'))->where('CONTRACT_ACC', $accno)->limit(1)->get();
             foreach ($U_DATA as $DAT) {
                 $user_details = \DB::table('users_details')->insert([
                 'DIVCODE' => $DAT->DivCode,
@@ -88,12 +88,12 @@ class UserController extends Controller
                 'CONTRACT_ACC' => $DAT->CONTRACT_ACC,
                 'CONSUMER_ACC' => $DAT->CONS_ACC,
                 'METER_NO' => $DAT->METER_NO,
-                'METER_TYPE' => $DAT->METER_TYPE,
-                'ADD1' => $DAT->CONS_ADD1,
-                'ADD2' => $DAT->CONS_ADD2,
-                'ADD3' => $DAT->CONS_ADD3,
-                'ADD4' => $DAT->CONS_ADD4,
-                'VILL_CODE' => $DAT->VILL_CODE,
+                'METER_TYPE' => "NULL",
+                'ADD1' => "NULL",
+                'ADD2' => "NULL",
+                'ADD3' => "NULL",
+                'ADD4' => "NULL",
+                'VILL_CODE' => "NULL",
                 'users_id' => $u_id,
                 ]);
             }
@@ -208,20 +208,21 @@ class UserController extends Controller
 
     public function apiregister(Request $request){
         try{
+            $user_details=false;
             $count=0;
             $contacc = $request->get('CONT_ACC');
-            $data=$request->only('name','lname','email','password','phone');
+            $data=$request->only('name','email','password','phone');
             $data['password'] = bcrypt($data['password']);
             $stl_conn = \DB::connection('sqlsrv_STL');
-            foreach ($contacc as $accnos) {
+            foreach ($contacc as $accnos){
                 $count=$count+1;            
                 $USER_DATA = $stl_conn->table('BILLING_OUTPUT_'.date('Y'))->where('CONTRACT_ACC', $accnos)->limit(1)->get();
                 if(empty($USER_DATA)){
-                    return response()->json(['errorInfo' => 'Contract Account Number '+$count+' does not exist'], 401);
+                    return response()->json(['errorInfo' => 'Contract Account Number '.$count.' does not exist'], 401);
                 }
             }
                 $user=\DB::table('users')->insert([
-                    'name' => $data['name']." ".$data['lname']." ",
+                    'name' => $data['name']." ",
                     'email' => $data['email'],
                     'password' => $data['password'],
                     'CONT_ACC' => "NULL",
@@ -235,7 +236,7 @@ class UserController extends Controller
                     $u_id = $id->id;
                 }
                 foreach ($contacc as $accno) {
-                    $U_DATA = $stl_conn->table('BILLING_INPUT_'.date('Y'))->where('CONTRACT_ACC', $accno)->limit(1)->get();
+                    $U_DATA = $stl_conn->table('BILLING_OUTPUT_'.date('Y'))->where('CONTRACT_ACC', $accno)->limit(1)->get();
                     foreach ($U_DATA as $DAT) {
                         $user_details = \DB::table('users_details')->insert([
                         'DIVCODE' => $DAT->DivCode,
@@ -243,12 +244,12 @@ class UserController extends Controller
                         'CONTRACT_ACC' => $DAT->CONTRACT_ACC,
                         'CONSUMER_ACC' => $DAT->CONS_ACC,
                         'METER_NO' => $DAT->METER_NO,
-                        'METER_TYPE' => $DAT->METER_TYPE,
-                        'ADD1' => $DAT->CONS_ADD1,
-                        'ADD2' => $DAT->CONS_ADD2,
-                        'ADD3' => $DAT->CONS_ADD3,
-                        'ADD4' => $DAT->CONS_ADD4,
-                        'VILL_CODE' => $DAT->VILL_CODE,
+                        'METER_TYPE' => "NULL",
+                        'ADD1' => "NULL",
+                        'ADD2' => "NULL",
+                        'ADD3' => "NULL",
+                        'ADD4' => "NULL",
+                        'VILL_CODE' => "NULL",
                         'users_id' => $u_id,
                         ]);
                     }
@@ -288,6 +289,7 @@ class UserController extends Controller
     }
 
     public function addcontacc(Request $request){
+        
         $cont_acc = $request->only('CONT_ACC');
         $id = \Auth::user()->id;
         $stl_conn = \DB::connection('sqlsrv_STL');
@@ -295,11 +297,9 @@ class UserController extends Controller
         if(empty($USER_DATA)){
             return back()->withInput()->withErrors(['CONT_ACC' => 'Contract Account Number does not exist']);
         }
-        $data = $stl_conn->table('BILLING_INPUT_'.date('Y'))->where('CONTRACT_ACC', $cont_acc)->limit(1)->get();
+        $data = $stl_conn->table('BILLING_OUTPUT_'.date('Y'))->where('CONTRACT_ACC', $cont_acc)->limit(1)->get();
         foreach ($data as $dat) {
             $cons_acc = $dat->CONS_ACC; $divcode = $dat->DivCode; $division = $dat->DIVISION; $meter_no = $dat->METER_NO;
-            $meter_type = $dat->METER_TYPE; $add1 = $dat->CONS_ADD1; $add2 = $dat->CONS_ADD2; $add3 = $dat->CONS_ADD3;
-            $add4 = $dat->CONS_ADD4; $vill_code = $dat->VILL_CODE;
         }
         $user_details = \DB::table('users_details')->insert([
                         'DIVCODE' => $divcode,
@@ -307,12 +307,12 @@ class UserController extends Controller
                         'CONTRACT_ACC' => $cont_acc,
                         'CONSUMER_ACC' => $cons_acc,
                         'METER_NO' => $meter_no,
-                        'METER_TYPE' => $meter_type,
-                        'ADD1' => $add1,
-                        'ADD2' => $add2,
-                        'ADD3' => $add3,
-                        'ADD4' => $add4,
-                        'VILL_CODE' => $vill_code,
+                        'METER_TYPE' => "NULL",
+                        'ADD1' => "NULL",
+                        'ADD2' => "NULL",
+                        'ADD3' => "NULL",
+                        'ADD4' => "NULL",
+                        'VILL_CODE' => "NULL",
                         'users_id' => $id,
                         ]);
         if($user_details){
