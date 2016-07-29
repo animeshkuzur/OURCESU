@@ -255,11 +255,12 @@ class UserController extends Controller
                                     
                 }
 
-                if($user){
+                if($user_details){
                     return response()->json(['Info' => 'user_registered'], 200);
                 }
-                else
-                return response()->json(['errorInfo' => 'credentials_exists'], 401);
+                else{
+                    return response()->json(['errorInfo' => 'credentials_exists'], 401);
+                }
         }
         catch(\Illuminate\Database\QueryException $ex){
             return response()->json($ex);
