@@ -213,6 +213,8 @@ class ApiAuthController extends Controller
             return response()->json(['errorInfo'=> $ex]);
         }
         $cont_acc = $request->only('CONT_ACC');
+        $id = $user->id;
+        \DB::table('users')->where('id',$id)->update(['CONT_ACC' => $cont_acc]);
         $users = \DB::table('users')->where('CONT_ACC',$cont_acc)->limit(1)->get();
         foreach ($users as $user) {
             $id = $user->id; $name = $user->name; $email = $user->email; $CONT_ACC = $user->CONT_ACC; $phone = $user->phone;
