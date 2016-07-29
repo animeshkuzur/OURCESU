@@ -103,7 +103,7 @@ class ApiAuthController extends Controller
 
         $users = \DB::select('select * from users where email = :email',['email'=>$data['email']]);       
         foreach ($users as $user) {
-            $id = $user->id; $name = $user->name; $email = $user->email; $CONT_ACC = $user->CONT_ACC; $phone = $user->phone;
+            $id = $user->id; $name = $user->name; $email = $user->email; $phone = $user->phone;
         }
 
         $user_data = \DB::table('users_details')->where('users_id',$id)->get();
@@ -113,6 +113,9 @@ class ApiAuthController extends Controller
         }
         if($count>1){
             return response()->json(['Info' => $user_data,'token' => $token], 200);; 
+        }
+        else{
+            \DB::table('users')->where('id',$id)->update(['CONT_ACC' => $cont_acc]);
         }
 
         $stl_conn = \DB::connection('sqlsrv_STL');
@@ -127,7 +130,7 @@ class ApiAuthController extends Controller
         return response()->json(['id'=>$id,
                                 'name' => $name,
                                 'email' => $email,
-                                'CONT_ACC' => $CONT_ACC,
+                                'CONT_ACC' => $cont_acc,
                                 'phone' => $phone,
                                 'CONS_ACC' => $cons_acc,
                                 'DivCode' => $divcode,
