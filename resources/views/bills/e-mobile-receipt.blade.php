@@ -1,4 +1,7 @@
 <style type="text/css">
+		.body{
+			background: white;
+		}
 		.container-b{
 			color: black;
 			max-width:330px;

@@ -41,7 +41,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
         $count = 0;
         $this->validate($request, User::$register_validation_rules);
         $stl_conn = \DB::connection('sqlsrv_STL');
@@ -50,12 +50,12 @@ class UserController extends Controller
         foreach ($contacc as $accnos) {
             $count=$count+1;
             if(empty($accnos)){
-                return back()->withInput()->withErrors(['CONT_ACC' => 'Contract Account Number ' +$count+ ' is missing']);
+                return back()->withInput()->withErrors(['CONT_ACC' => 'Contract Account Number ' .$count. ' is missing']);
             }
             else{
                 $USER_DATA = $stl_conn->table('BILLING_OUTPUT_'.date('Y'))->where('CONTRACT_ACC', $accnos)->limit(1)->get();
                 if(empty($USER_DATA)){
-                    return back()->withInput()->withErrors(['CONT_ACC' => 'Contract Account Number '+$count+' does not exist']);
+                    return back()->withInput()->withErrors(['CONT_ACC' => 'Contract Account Number '.$count.' does not exist']);
                 }
             }
         }
@@ -99,7 +99,7 @@ class UserController extends Controller
             }
                             
         }
-        return redirect()->route('login'); 
+        return redirect()->route('login');
     }
 
     /**
@@ -289,7 +289,7 @@ class UserController extends Controller
     }
 
     public function addcontacc(Request $request){
-        
+        $this->validate($request, User::$add_contract_rules);
         $cont_acc = $request->only('CONT_ACC');
         $id = \Auth::user()->id;
         $stl_conn = \DB::connection('sqlsrv_STL');

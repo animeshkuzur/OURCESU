@@ -48,6 +48,7 @@ class User extends Model implements AuthenticatableContract,
         'email' => 'required|email|Unique:users',
         'password' => 'required|min:8',
         'password_confirmation' => 'required',
+        'CONT_ACC' => 'required',
         'phone' => 'required|Unique:users|max:10'
     ];
 
@@ -60,5 +61,9 @@ class User extends Model implements AuthenticatableContract,
         'password1' => 'required',
         'password2' => 'required|min:8',
         'password3' => 'required|min:8'
+    ];
+
+    public static $add_contract_rules = [
+        'CONT_ACC' => 'required'
     ];
 }

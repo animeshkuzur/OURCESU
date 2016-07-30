@@ -166,7 +166,6 @@ class DocController extends Controller
         foreach ($months as $month) {
             $item2[$month->BillMonth]=substr($month->BillMonth,0,4)."-".substr($month->BillMonth,4,2);
         }
-
         return view('docs.e-mobile-receipts',['item2'=>$item2,'data'=>$data]);
     }
 

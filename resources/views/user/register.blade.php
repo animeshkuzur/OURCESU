@@ -26,7 +26,7 @@
 					@endforeach				
 				@endif
 				@endif
-				{!! Form::open(array('route' => 'user.store')) !!}
+				{!! Form::open(array('route' => 'user.store','method'=>'POST')) !!}
 					<div class="row">
 						<div class="col-md-6">
 							{!! Form::text('name', null, array('class' => 'form-control','placeholder'=>'First Name')) !!}
@@ -53,7 +53,8 @@
 					<br>
 					<div class="row">
 						<div class="col-md-6" id="cont_acc1">
-							{!! Form::text('CONT_ACC[]', null, array('class' => 'form-control','placeholder'=>'CONTRACT ACCOUNT NUMBER')) !!}
+							
+							<input class="form-control" placeholder="CONTRACT ACCOUNT NUMBER" name="CONT_ACC[]" type="text">
 						</div>
 						<div class="col-md-6">
 							{!! Form::text('phone', null, array('class' => 'form-control','placeholder'=>'Mobile No.')) !!}

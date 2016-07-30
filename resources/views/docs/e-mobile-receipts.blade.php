@@ -46,7 +46,7 @@
 							<p><hr></p>
 							<div class="row">
 								<div class="col-md-12">
-									<a class="btn btn-danger btn-block disabled" href="#" role="button">DOWNLOAD</a>	
+									<a class="btn btn-danger btn-block" href="#" role="button">DOWNLOAD</a>	
 								</div>
 							</div>
 						</div>
