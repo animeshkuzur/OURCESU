@@ -12,7 +12,8 @@ class VerifyCsrfToken extends BaseVerifier
      * @var array
      */
     protected $except = [ 'api/login', 'api/register', 'api/logout' , 'api/getuser', 'api/gettoken', 'api/getstl', 'api/getsap',
-    					  'api/savesettings','api/changepassword', 'api/apiemobilereceipt'
+    					  'api/savesettings','api/changepassword', 'api/apiemobilereceipt', 'api/selectacc' , 'api/addcontacc' ,
+    					  'api/apimoneyreceipt','api/getservicereq'
         //
     ];
 }
