@@ -121,9 +121,7 @@ class ApiAuthController extends Controller
         $stl_conn = \DB::connection('sqlsrv_STL');
         $data = \DB::table('users_details')->where('users_id',$id)->limit(1)->get();
         foreach($data as $dat){
-            $cons_acc = $dat->CONS_ACC; $divcode = $dat->DivCode; $division = $dat->DIVISION; $meter_no = $dat->METER_NO;
-            $meter_type = $dat->METER_TYPE; $add1 = $dat->CONS_ADD1; $add2 = $dat->CONS_ADD2; $add3 = $dat->CONS_ADD3;
-            $add4 = $dat->CONS_ADD4; $vill_code = $dat->VILL_CODE;
+            $cons_acc = $dat->CONSUMER_ACC; $divcode = $dat->DivCode; $division = $dat->DIVISION; $meter_no = $dat->METER_NO;
         }
         
         // if no errors are encountered we can return a JWT
@@ -136,12 +134,12 @@ class ApiAuthController extends Controller
                                 'DivCode' => $divcode,
                                 'DIVISION' => $division,
                                 'METER_NO' => $meter_no,
-                                'METER_TYPE' => $meter_type,
-                                'ADD1' => $add1,
-                                'ADD2' => $add2,
-                                'ADD3' => $add3,
-                                'ADD4' => $add4,
-                                'VILL_CODE' => $vill_code,
+                                'METER_TYPE' => "NULL",
+                                'ADD1' => "NULL",
+                                'ADD2' => "NULL",
+                                'ADD3' => "NULL",
+                                'ADD4' => "NULL",
+                                'VILL_CODE' => "NULL",
                                 'token' => $token,
                                 ]);
 
