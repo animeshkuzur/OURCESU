@@ -293,18 +293,18 @@ class UserController extends Controller
         $cont_acc = $request->only('CONT_ACC');
         $id = \Auth::user()->id;
         $stl_conn = \DB::connection('sqlsrv_STL');
-        $USER_DATA = $stl_conn->table('BILLING_OUTPUT_'.date('Y'))->where('CONTRACT_ACC', $cont_acc)->limit(1)->get();
+        $USER_DATA = $stl_conn->table('BILLING_OUTPUT_'.date('Y'))->where('CONTRACT_ACC', $cont_acc['CONT_ACC'])->limit(1)->get();
         if(empty($USER_DATA)){
             return back()->withInput()->withErrors(['CONT_ACC' => 'Contract Account Number does not exist']);
         }
-        $data = $stl_conn->table('BILLING_OUTPUT_'.date('Y'))->where('CONTRACT_ACC', $cont_acc)->limit(1)->get();
+        $data = $stl_conn->table('BILLING_OUTPUT_'.date('Y'))->where('CONTRACT_ACC', $cont_acc['CONT_ACC'])->limit(1)->get();
         foreach ($data as $dat) {
             $cons_acc = $dat->CONS_ACC; $divcode = $dat->DivCode; $division = $dat->DIVISION; $meter_no = $dat->METER_NO;
         }
         $user_details = \DB::table('users_details')->insert([
                         'DIVCODE' => $divcode,
                         'DIVISION' => $division,
-                        'CONTRACT_ACC' => $cont_acc,
+                        'CONTRACT_ACC' => $cont_acc['CONT_ACC'],
                         'CONSUMER_ACC' => $cons_acc,
                         'METER_NO' => $meter_no,
                         'METER_TYPE' => "NULL",

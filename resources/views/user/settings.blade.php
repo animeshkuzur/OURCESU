@@ -160,6 +160,18 @@
 				</div>
 
 				<div class="row">
+					<div class="col-md-4">
+						<div class="details">
+							<h4>Switch Contract Account</h4>
+							<hr><br>
+							<div class="row">
+								<div class="col-md-12">
+									<a href="{{url('/select-acc')}}" class="btn btn-primary btn-block btn-lg"><span class="glyphicon glyphicon-refresh"></span>&nbsp;&nbsp;SWITCH</a>		
+								</div>
+							</div>
+							
+						</div>
+					</div>
 					<div class="col-md-8">
 						<div class="details">
 							<h4>Add Contract Account Number</h4>
@@ -174,18 +186,6 @@
 								</div>
 							{!! Form::close() !!}
 							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="details">
-							<h4>Switch Contract Account</h4>
-							<hr><br>
-							<div class="row">
-								<div class="col-md-12">
-									<a href="{{url('/select-acc')}}" class="btn btn-primary btn-block btn-lg"><span class="glyphicon glyphicon-refresh"></span>&nbsp;&nbsp;SWITCH</a>		
-								</div>
-							</div>
-							
 						</div>
 					</div>
 				</div>
