@@ -166,4 +166,60 @@ class ApiDocController extends Controller
         return response()->json(['Info' => $data]);
     }
 
+    public function spotbill(Request $request){
+        try {
+            if (!$user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['errorInfo' => 'user_not_found'], 404);
+            }
+        } 
+        catch (\Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
+            return response()->json(['errorInfo' => 'token_expired'], $e->getStatusCode());
+        } 
+        catch (\Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
+            return response()->json(['errorInfo' => 'token_invalid'], $e->getStatusCode());
+        } 
+        catch (\Tymon\JWTAuth\Exceptions\JWTException $e) {
+            return response()->json(['errorInfo' => 'token_absent'], $e->getStatusCode());
+        }
+
+        $user_cont_acc = $user->CONT_ACC;
+        $billmonth = $request->only('BillMonth');
+        $stl_conn = \DB::connection('sqlsrv_STL');
+        $data = $stl_conn->table('BILLING_OUTPUT_'.date('Y'))->where('CONTRACT_ACC', $user_cont_acc)->where('BillMonth',$billmonth)->get();
+        foreach ($data as $dat) {
+        }
+        $path = base_path('temp/spotbills/'.$user_cont_acc.'.pdf');
+        $pdf = \PDF::loadView('bills.spot-bill', ['dat'=>$dat]);
+        $pdf->save($path,$overwrite = true);
+        return response()->json(['Info' => $data,'Download' => $path]);
+    }
+
+    public function sapbill(Request $request){
+        try {
+            if (!$user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['errorInfo' => 'user_not_found'], 404);
+            }
+        } 
+        catch (\Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
+            return response()->json(['errorInfo' => 'token_expired'], $e->getStatusCode());
+        } 
+        catch (\Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
+            return response()->json(['errorInfo' => 'token_invalid'], $e->getStatusCode());
+        } 
+        catch (\Tymon\JWTAuth\Exceptions\JWTException $e) {
+            return response()->json(['errorInfo' => 'token_absent'], $e->getStatusCode());
+        }
+
+        $user_cont_acc = $user->CONT_ACC;
+        $billmonth = $request->only('BillMonth');
+        $stl_conn = \DB::connection('sqlsrv_SAP');
+        $data = $stl_conn->table('BILLING_DATA')->where('CONTRACT_ACC', $user_cont_acc)->where('BILL_MONTH',$billmonth)->get();
+        foreach ($data as $dat) {
+        }
+        $path = base_path('temp/sapbills/'.$user_cont_acc.'.pdf');
+        $pdf = \PDF::loadView('bills.sap-bill', ['dat'=>$dat]);
+        $pdf->save($path,$overwrite = true);
+        return response()->json(['Info' => $data,'Download' => $path]);
+    }
+
 }

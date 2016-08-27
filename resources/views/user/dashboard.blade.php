@@ -55,6 +55,9 @@
 					</div>
 					</div>
 				</div>
+
+
+
 				<div class="row">
 				<div class="col-md-12">
 					<div class="notice">
@@ -68,26 +71,38 @@
 				</div>
 
 				<div class="row">
-					<div class="col-md-3">
-						<a class="btn btn-lg btn-primary btn-block shcut" href="{{ url('/dashboard/feedbacks')}}">
-						<span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;&nbsp;&nbsp;Feedback 
-						</a>					
+					<div class="col-md-6">
+						<a href="{{ url('/dashboard/offline-docs')}}" class="btn btn-default btn-block offline-docs">
+							<span class="glyphicon glyphicon-file"></span>&nbsp;Offline Documents
+						</a>
 					</div>
-					<div class="col-md-3">
-						<a class="btn btn-lg btn-success btn-block shcut" href="{{ url('/dashboard/settings')}}">
-						<span class="glyphicon glyphicon-wrench"></span>&nbsp;&nbsp;&nbsp;&nbsp;Settings 
-						</a>					
+					<div class="col-md-6">
+						<div class="row">
+							<div class="col-md-6">
+								<a class="btn btn-lg btn-primary btn-block shcut" href="{{ url('/dashboard/feedbacks')}}">
+								<span class="glyphicon glyphicon-comment"></span>&nbsp;Feedback 
+								</a>
+							</div>
+							<div class="col-md-6">
+								<button type="button" class="btn btn-lg btn-warning btn-block shcut" data-toggle="modal" data-target="#ContactUs">
+								<span class="glyphicon glyphicon-earphone"></span>&nbsp;Contact Us 
+								</button>
+							</div>
+						</div>
+						<!--<div class="row">
+							<div class="col-md-12">
+								<a class="btn btn-lg btn-danger btn-block shcut">
+								<span class="glyphicon glyphicon-phone"></span>&nbsp;Download App 
+								</a>
+							</div>
+						</div>-->
+																
+					
+											
+					
+											
 					</div>
-					<div class="col-md-3">
-						<button type="button" class="btn btn-lg btn-warning btn-block shcut" data-toggle="modal" data-target="#ContactUs">
-						<span class="glyphicon glyphicon-earphone"></span>&nbsp;&nbsp;&nbsp;&nbsp;Contact Us 
-						</button>					
-					</div>
-					<div class="col-md-3">
-						<a class="btn btn-lg btn-danger btn-block shcut">
-						<span class="glyphicon glyphicon-phone"></span>&nbsp;&nbsp;&nbsp;&nbsp;Download App 
-						</a>					
-					</div>
+					
 
 				</div>
 

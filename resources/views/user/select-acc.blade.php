@@ -41,6 +41,7 @@
 					METER NO: <b>{{ $dat->METER_NO }}</b>
 				</div>
 			</div>
+			<br>
 			<div class="row">
 				<div class="col-md-12">
 					{!! Form::open(array('route' => 'selected-acc','method'=>'POST')) !!}

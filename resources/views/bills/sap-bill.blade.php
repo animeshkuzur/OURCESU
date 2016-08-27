@@ -1,3 +1,4 @@
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
 	<style type="text/css">
 		.container-b{
 			color: black;
@@ -38,7 +39,7 @@
 	</style>
 	<div class="container-b">
 		<div class="row">
-			<div class="col-xs-4 left">
+			<div class="col-xs-4">
 				<img src="{{ URL::asset('images/logo_cesu.png') }}" class="sap-logo img-responsive">
 			</div>
 			<div class="col-xs-8 title">

@@ -135,7 +135,7 @@
   	color: #3a3a3c;
   	margin-top: 25px;
   	/*min-width: 40px;*/
-  	margin-left: -20px;
+  	margin-left: -5px;
 }
 .navbar-default > .container{
     padding:0px;
@@ -160,7 +160,7 @@
     margin-right: 25px;
     margin-top:12px;
 }
-.glyphicon-cog{
+/*.glyphicon-cog{
     float:right;
     display: inline-block;
     margin-right: 25px;
@@ -171,7 +171,7 @@
     display: inline-block;
     margin-right: 25px;
     margin-top:12px;
-}
+}*/
 .glyphicon-dashboard{
     float:right;
     display: inline-block;

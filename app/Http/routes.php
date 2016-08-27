@@ -48,6 +48,10 @@ Route::get('/dashboard/inspection-report',['middleware'=>'auth','as'=>'inspectio
 Route::get('/dashboard/provisional-ass',['middleware'=>'auth','as'=>'provisionalass','uses'=>'DocController@provisionalass']);
 Route::get('/dashboard/final-ass',['middleware'=>'auth','as'=>'finalass','uses'=>'DocController@finalass']);
 Route::post('/dashboard/addcontacc',['middleware' => 'auth','as' => 'addcontacc','uses'=>'UserController@addcontacc']);
+Route::get('/dashboard/offline-docs',['middleware' => 'auth','as' => 'offlinedocs','uses'=>'DocController@offlinedocs']);
+Route::get('/dashboard/disconnect-notice',['middleware' => 'auth','as' => 'disconnectnotice','uses' => 'DocController@disconnectnotice']);
+Route::get('/dashboard/demand-note',['middleware' => 'auth', 'as' => 'demandnote','uses' => 'DocController@demandnote']);
+
 
 
 Route::group(['prefix'=>'api'],function(){
@@ -65,6 +69,8 @@ Route::group(['prefix'=>'api'],function(){
 	Route::get('/getservicereq',['uses' => 'ApiDocController@getservicereq']);
 	Route::get('/selectacc',['uses' => 'ApiAuthController@apiselectacc']);
 	Route::get('/addcontacc',['uses' => 'ApiUserController@addcontacc']);
+	Route::get('/spotbill',['uses' => 'ApiDocController@spotbill']);
+	Route::get('/sapbill',['uses' => 'ApiDocController@sapbill']);
 });
 
 

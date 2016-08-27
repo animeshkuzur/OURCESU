@@ -117,6 +117,10 @@ class DocController extends Controller
                 $item2[$month->BillMonth]=substr($month->BillMonth,0,4)."-".substr($month->BillMonth,4,2);
             }
         }
+        /*foreach ($data as $dat) {
+        }
+        $pdf = \PDF::loadView('bills.spot-bill', ['dat'=>$dat]);
+        return $pdf->download('spot-bills.pdf');*/
 
         return view('docs.spot-bills',['item2'=>$item2,'data'=>$data,'date'=>$date]);
     }
@@ -134,6 +138,12 @@ class DocController extends Controller
         foreach ($months as $month) {
             $item2[$month->BILL_MONTH]=substr($month->BILL_MONTH,0,4)."-".substr($month->BILL_MONTH,4,2);
         }
+
+        //$pdf = \PDF::loadView('docs.sap-bills', $item2);
+        //$pdf->download('sap-bills.pdf');
+
+        $pdf = \PDF::loadView('bills.sap-bill');
+        return $pdf->download('sap-bill.pdf');
 
         return view('docs.sap-bills',['item2'=>$item2]);
     }
@@ -166,6 +176,9 @@ class DocController extends Controller
         foreach ($months as $month) {
             $item2[$month->BillMonth]=substr($month->BillMonth,0,4)."-".substr($month->BillMonth,4,2);
         }
+
+        
+
         return view('docs.e-mobile-receipts',['item2'=>$item2,'data'=>$data]);
     }
 
@@ -210,5 +223,26 @@ class DocController extends Controller
 
     public function finalass(){
         return view('docs.final-ass');
+    }
+
+    public function offlinedocs(){
+        try{
+            $CONS_ACC=NULL;
+            $CONTRACT_ACC = \Auth::user()->CONT_ACC;
+            $service_conn = \DB::connection('sqlsrv_SERVICE');
+            $data=$service_conn->table('CONS_DOC_MAS')->join('DOC_TITLE_MAS','CONS_DOC_MAS.DOC_TITLE_ID','=','DOC_TITLE_MAS.DOC_TITLE_ID')->join('DOC_TYPE_MAS','CONS_DOC_MAS.DOC_TYPE_ID','=','DOC_TYPE_MAS.DOC_TYPE_ID')->where('CONTRACT_ACC',$CONTRACT_ACC)->get();
+        }
+        catch(Exception $e){
+            return view('errors.503');
+        }
+        return view('offline.main',['data'=>$data]);
+    }
+
+    public function disconnectnotice(){
+        return view('docs.disconnect-notice');
+    }
+
+    public function demandnote(){
+        return view('docs.demand-note');
     }
 }

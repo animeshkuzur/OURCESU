@@ -116,13 +116,13 @@
         position: relative;
         margin-right: 0;
     }
+
 }
 .glyphicon-menu-hamburger {
   	font-size: 35px;
   	color: #3a3a3c;
   	margin-top: 25px;
-  	/*min-width: 40px;*/
-  	margin-left: -20px;
+  	margin-left: -5px;
 }
 .db-hr{
   border-color: #d5d5d5;
@@ -174,7 +174,7 @@
     margin-top:12px;
 }
 
-.glyphicon-cog{
+/*.glyphicon-cog{
     float:right;
     display: inline-block;
     margin-right: 25px;
@@ -185,7 +185,7 @@
     display: inline-block;
     margin-right: 25px;
     margin-top:12px;
-}
+}*/
 .morris-hover{
     position:absolute;
     z-index:1000
@@ -229,5 +229,14 @@
     margin-top: -20px;
 }
 .shcut{
+    margin-bottom: 10px;
+}
+.offline-docs{
+    font-size: 30px;
+    text-align: center;
+    padding: 15px 5px 15px 5px;
+    background:white;
+    border-radius: 5px;
+    border: 1px solid #d5d5d5;
     margin-bottom: 10px;
 }
