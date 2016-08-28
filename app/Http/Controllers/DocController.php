@@ -142,8 +142,8 @@ class DocController extends Controller
         //$pdf = \PDF::loadView('docs.sap-bills', $item2);
         //$pdf->download('sap-bills.pdf');
 
-        $pdf = \PDF::loadView('bills.sap-bill');
-        return $pdf->download('sap-bill.pdf');
+        //$pdf = \PDF::loadView('bills.sap-bill');
+        //return $pdf->download('sap-bill.pdf');
 
         return view('docs.sap-bills',['item2'=>$item2]);
     }

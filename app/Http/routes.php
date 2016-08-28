@@ -71,6 +71,8 @@ Route::group(['prefix'=>'api'],function(){
 	Route::get('/addcontacc',['uses' => 'ApiUserController@addcontacc']);
 	Route::get('/spotbill',['uses' => 'ApiDocController@spotbill']);
 	Route::get('/sapbill',['uses' => 'ApiDocController@sapbill']);
+	Route::get('/servicereq',['uses' => 'ApiDocController@servicereq']);
+	Route::get('/emobilereceipt',['uses' => 'ApiDocController@emobilereceipt']);
 });
 
 
