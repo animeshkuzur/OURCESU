@@ -54,6 +54,7 @@ Route::get('/dashboard/disconnect-notice',['middleware' => 'auth','as' => 'disco
 Route::get('/dashboard/demand-note',['middleware' => 'auth', 'as' => 'demandnote','uses' => 'DocController@demandnote']);
 Route::get('/dashboard/listspotbill',['middleware' => 'auth', 'as' => 'listspotbill','uses' => 'DocController@listspotbill']);
 Route::get('/dashboard/listsapbill',['middleware' => 'auth', 'as' => 'listsapbill','uses' => 'DocController@listsapbill']);
+Route::get('/dashboard/foc-slip',['middleware' => 'auth','as' => 'focslip','uses' => 'DocController@focslip']);
 
 
 Route::group(['prefix'=>'api'],function(){

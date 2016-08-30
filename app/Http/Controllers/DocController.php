@@ -281,4 +281,8 @@ class DocController extends Controller
     public function demandnote(){
         return view('docs.demand-note');
     }
+
+    public function focslip(){
+        return view('docs.foc-slip');
+    }
 }

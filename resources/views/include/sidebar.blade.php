@@ -4,6 +4,13 @@
 				<li class="sidebar-brand"><a href="#">Hi &nbsp;{{ substr(\Auth::user()->name,0,strpos(\Auth::user()->name,' ')) }}&nbsp;!</a></li>
 				<li><a href="{{ url('/dashboard') }}">Dashboard<span class="glyphicon glyphicon-dashboard"></span></a></li>
 				<li>
+					<a data-toggle="collapse" data-parent="#accordion1" href="#consumer">Consumer Care<span class="glyphicon glyphicon-chevron-down"></span></a>
+					<ul id="consumer" class="collapse">
+						<li><a href="{{ url('/dashboard/service-request') }}">Service Requested</a></li>
+						<li><a href="{{ url('/dashboard/foc-slip') }}">FOC Slip</a></li>
+					</ul>
+				</li>
+				<li>
 					<a data-toggle="collapse" data-parent="#accordion1" href="#connection">Connection<span class="glyphicon glyphicon-chevron-down"></span></a>
 					<ul id="connection" class="collapse">
 						<li><a href="{{ url('/dashboard/demand-note') }}">Demand Note</a></li>
@@ -46,7 +53,7 @@
 	                    <li><a href="{{url('/dashboard/final-ass')}}">Final Assessment</a></li>
                		</ul>
 				</li>
-				<li><a href="{{ url('/dashboard/service-request') }}">Service Requested<span class="glyphicon glyphicon-chevron-right"></span></a>
+				
 				<li>
 
 				</li>
