@@ -134,7 +134,7 @@ class ApiDocController extends Controller
         foreach ($data as $dat) {
         }
         $path = base_path('temp/emobilereceipt/'.$user_cont_acc.'.pdf');
-        $pdf = \PDF::loadView('bills.e-mobile-receipt', ['dat'=>$dat]);
+        $pdf = \PDF::loadView('pdf-layout.e-mobile-receipt', ['dat'=>$dat]);
         $pdf->save($path,$overwrite = true);
         return response()->json(['Info' => $data,'Download' => $path]);
     }
@@ -226,7 +226,7 @@ class ApiDocController extends Controller
         foreach ($data as $dat) {
         }
         $path = base_path('temp/servicereq/'.$CONTRACT_ACC.'.pdf');
-        $pdf = \PDF::loadView('bills.service-request', ['dat'=>$dat]);
+        $pdf = \PDF::loadView('pdf-layout.service-request', ['dat'=>$dat]);
         $pdf->save($path,$overwrite = true);
         return response()->json(['Info' => $data,'Download' => $path]);
     }
@@ -254,7 +254,7 @@ class ApiDocController extends Controller
         foreach ($data as $dat) {
         }
         $path = base_path('temp/spotbills/'.$user_cont_acc.'.pdf');
-        $pdf = \PDF::loadView('bills.spot-bill', ['dat'=>$dat]);
+        $pdf = \PDF::loadView('pdf-layout.spot-bill', ['dat'=>$dat]);
         $pdf->save($path,$overwrite = true);
         return response()->json(['Info' => $data,'Download' => $path]);
     }
@@ -282,7 +282,7 @@ class ApiDocController extends Controller
         foreach ($data as $dat) {
         }
         $path = base_path('temp/sapbills/'.$user_cont_acc.'.pdf');
-        $pdf = \PDF::loadView('bills.sap-bill', ['dat'=>$dat]);
+        $pdf = \PDF::loadView('pdf-layout.sap-bill', ['dat'=>$dat]);
         $pdf->save($path,$overwrite = true);
         return response()->json(['Info' => $data,'BillMonth'=>$billmonth,'Download' => $path]);
     }

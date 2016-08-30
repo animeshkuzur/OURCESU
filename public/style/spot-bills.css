@@ -131,11 +131,10 @@
 
 }
 .glyphicon-menu-hamburger {
-  	font-size: 35px;
-  	color: #3a3a3c;
-  	margin-top: 25px;
-  	/*min-width: 40px;*/
-  	margin-left: -5px;
+    font-size: 35px;
+    color: #3a3a3c;
+    margin-top: 25px;
+    margin-left: -5px;
 }
 .navbar-default > .container{
     padding:0px;

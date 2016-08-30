@@ -24,14 +24,17 @@
 				<div class="row">
 					<div class="col-md-3 col-sm-push-9">
 						<div class="details float">
-							<h4>Select Date</h4>
-							<hr>
+							<ul class="nav nav-tabs ">
+							  <li role="presentation" class="active"><a href="#">Date View</a></li>
+							  <li role="presentation"><a href="{{ url('/dashboard/listspotbill') }}">List View</a></li>
+							</ul>
+							<br>
 							{!! Form::open(array('route' => 'getspotbills', 'method'=>'POST')) !!}
 							<div class="row">
 								<div class="form-group">
 									<label for="date" class="col-sm-4 control-label">Date:</label>
 									<div class="col-sm-8">
-										{!! Form::select('date', $item2, null,array('class' => 'form-control','id'=>'year','title'=>'Select Date')); !!}
+										{!! Form::select('date', $item2, null,array('class' => 'form-control','id'=>'year','title'=>'Select Date','active')); !!}
 									</div>
 								</div>
 							</div>
@@ -58,6 +61,33 @@
 							@foreach($data as $dat)
 							@endforeach
 							@include('bills.spot-bill')
+						@endif
+						@if(isset($lstdata))
+							<div class="table-responsive">
+								<table class="table table-striped">
+								    <thead>
+								      <tr style="font-size: 14px;">
+								      	<th>Bill Month</th>
+								      	<th>Units Billed</th>
+								      	<th>Amount</th>
+								      	<th>View</th>
+								      </tr>
+								    </thead>
+									<tbody>
+									@foreach($lstdata as $lst)
+										<tr style="font-size: 14px;">
+										    <td>{{ substr($lst->BillMonth,0,4)."-".substr($lst->BillMonth,4,5) }}</td>
+										    <td>{{ $lst->UNITS_BILLED }}</td>
+										    <td>{{ $lst->CUR_BILL }}</td>
+										    {!! Form::open(array('route' => 'getspotbills', 'method'=>'POST')) !!}
+										    <input type="hidden" name="date" value="{{ $lst->BillMonth }}"></input>
+										    <td>{!! Form::submit('GET BILL',array('class' => 'btn btn-sm btn-default btn-block','name'=>'submit')) !!}</td>
+										    {!! Form::close() !!}
+										</tr>
+									@endforeach
+									</tbody>
+								</table>
+							</div>
 						@endif
 						</div>
 					</div>

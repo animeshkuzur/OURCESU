@@ -119,10 +119,9 @@
 }
 .glyphicon-menu-hamburger {
   	font-size: 35px;
-  	color: #3a3a3c;
-  	margin-top: 25px;
-  	/*min-width: 40px;*/
-  	margin-left: -20px;
+    color: #3a3a3c;
+    margin-top: 25px;
+    margin-left: -5px;
 }
 .db-hr{
   border-color: #d5d5d5;
@@ -155,7 +154,7 @@
     margin-right: 25px;
     margin-top:12px;
 }
-.glyphicon-cog{
+/*.glyphicon-cog{
     float:right;
     display: inline-block;
     margin-right: 25px;
@@ -166,7 +165,7 @@
     display: inline-block;
     margin-right: 25px;
     margin-top:12px;
-}
+}*/
 .glyphicon-dashboard{
     float:right;
     display: inline-block;

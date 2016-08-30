@@ -22,8 +22,11 @@
 				<div class="row">
 					<div class="col-md-3 col-sm-push-9">
 						<div class="details float">
-							<h4>Select Date</h4>
-							<hr>
+							<ul class="nav nav-tabs ">
+							  <li role="presentation" class="active"><a href="#">Date View</a></li>
+							  <li role="presentation"><a href="{{ url('/dashboard/listsapbill') }}">List View</a></li>
+							</ul>
+							<br>
 							{!! Form::open(array('route' => 'getspotbills', 'method'=>'POST')) !!}
 							<div class="row">
 								<div class="form-group">
@@ -52,8 +55,36 @@
 					</div>
 					<div class="col-md-9 col-sm-pull-3">
 						<div class="details bill">
-						
+						@if(!isset($lstdata))
 							@include('bills.sap-bill')
+						@endif
+						@if(isset($lstdata))
+							<div class="table-responsive">
+								<table class="table table-striped">
+								    <thead>
+								      <tr style="font-size: 14px;">
+								      	<th>Bill Month</th>
+								      	<th>Units Billed</th>
+								      	<th>Amount</th>
+								      	<th>View</th>
+								      </tr>
+								    </thead>
+									<tbody>
+									@foreach($lstdata as $lst)
+										<tr style="font-size: 14px;">
+										    <td>{{ substr($lst->BILL_MONTH,0,4)."-".substr($lst->BILL_MONTH,4,5) }}</td>
+										    <td>{{ $lst->NET_UNT }}</td>
+										    <td>{{ $lst->CUR_EC }}</td>
+										    {!! Form::open(array('route' => 'sap-bills', 'method'=>'POST')) !!}
+										    <input type="hidden" name="date" value="{{ $lst->BILL_MONTH }}"></input>
+										    <td>{!! Form::submit('GET BILL',array('class' => 'btn btn-sm btn-default btn-block','name'=>'submit')) !!}</td>
+										    {!! Form::close() !!}
+										</tr>
+									@endforeach
+									</tbody>
+								</table>
+							</div>
+						@endif
 						</div>
 					</div>
 				</div>

@@ -126,7 +126,7 @@ class ApiUserController extends Controller
         
         $user_cont_acc = $user->CONT_ACC;
         $stl_conn = \DB::connection('sqlsrv_SAP');
-        $data = $stl_conn->table('BILLING_DATA')->where('CONTRACT_ACC', $user_cont_acc)->orderBy('BILL_MONTH', 'asc')->get();
+        $data = $stl_conn->table('BILLING_DATA')->where('CONTRACT_ACC', $user_cont_acc)->orderBy('BILL_MONTH', 'asc')->get(['BILL_MONTH AS BillMonth', 'BILLING_DATA.*' ]);
         return response()->json(['Info' => $data]);
     }
 

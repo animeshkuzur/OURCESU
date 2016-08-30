@@ -164,5 +164,8 @@
         hideHover: 'auto',
         resize: true,
       });
+
+
+	
 	</script>
 @endsection

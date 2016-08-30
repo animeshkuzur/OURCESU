@@ -33,6 +33,7 @@ Route::get('/dashboard/getspotbills',['middleware' => 'auth','as' => 'getspotbil
 }]);
 Route::get('/dashboard/money-receipts',['middleware'=>'auth','as'=>'moneyreceipt','uses'=>'DocController@moneyreceipt']);
 Route::get('/dashboard/sap-bills',['middleware'=>'auth','as'=>'sap-bills','uses'=>'DocController@sapbills']);
+Route::post('/dashboard/sap-bills',['middleware'=>'auth','as'=>'sap-bills','uses'=>'DocController@sapbills']);
 
 Route::get('/dashboard/e-mobile-receipts',['middleware'=>'auth','as'=>'emobilereceipt','uses'=>'DocController@emobilereceipt']);
 Route::post('/dashboard/getemobilereceipts',['middleware'=>'auth','as'=>'getemobilereceipt','uses'=>'DocController@getemobilereceipt']);
@@ -51,7 +52,8 @@ Route::post('/dashboard/addcontacc',['middleware' => 'auth','as' => 'addcontacc'
 Route::get('/dashboard/offline-docs',['middleware' => 'auth','as' => 'offlinedocs','uses'=>'DocController@offlinedocs']);
 Route::get('/dashboard/disconnect-notice',['middleware' => 'auth','as' => 'disconnectnotice','uses' => 'DocController@disconnectnotice']);
 Route::get('/dashboard/demand-note',['middleware' => 'auth', 'as' => 'demandnote','uses' => 'DocController@demandnote']);
-
+Route::get('/dashboard/listspotbill',['middleware' => 'auth', 'as' => 'listspotbill','uses' => 'DocController@listspotbill']);
+Route::get('/dashboard/listsapbill',['middleware' => 'auth', 'as' => 'listsapbill','uses' => 'DocController@listsapbill']);
 
 
 Route::group(['prefix'=>'api'],function(){
