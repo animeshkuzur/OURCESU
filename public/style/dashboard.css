@@ -150,6 +150,15 @@
     border-radius: 5px;
     border: 1px solid #d5d5d5;
 }
+.docs{
+    margin: 5px 5px 15px 5px;
+    padding: 10px;
+    text-align: left;
+    font-size: 20px;
+    background:white;
+    border-radius: 5px;
+    border: 1px solid #d5d5d5;
+}
 .navbar-default > .container{
     padding:0px;
     margin-top:-20px;

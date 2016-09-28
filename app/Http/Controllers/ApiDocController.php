@@ -133,7 +133,7 @@ class ApiDocController extends Controller
         $data = \DB::table('VW_SPOT_MR_DETAILS')->where(['CONTRACT_ACC'=> $user_cont_acc])->where('BillMonth', $billmonth)->get();
         foreach ($data as $dat) {
         }
-        $path = base_path('temp/emobilereceipt/'.$user_cont_acc.'.pdf');
+        $path = base_path('/temp/emobilereceipt/'.$user_cont_acc.'.pdf');
         $pdf = \PDF::loadView('pdf-layout.e-mobile-receipt', ['dat'=>$dat]);
         $pdf->save($path,$overwrite = true);
         return response()->json(['Info' => $data,'Download' => $path]);
@@ -253,10 +253,11 @@ class ApiDocController extends Controller
         $data = $stl_conn->table('BILLING_OUTPUT_'.date('Y'))->where('CONTRACT_ACC', $user_cont_acc)->where('BillMonth',$billmonth)->get();
         foreach ($data as $dat) {
         }
-        $path = base_path('temp/spotbills/'.$user_cont_acc.'.pdf');
+        $path = base_path('public/temp/spotbills/'.$user_cont_acc.'.pdf');
+        $url = "http://223.30.127.83:81/ConsumerVault/temp/spotbills/".$user_cont_acc.".pdf";
         $pdf = \PDF::loadView('pdf-layout.spot-bill', ['dat'=>$dat]);
         $pdf->save($path,$overwrite = true);
-        return response()->json(['Info' => $data,'Download' => $path]);
+        return response()->json(['Info' => $data,'Download' => $url]);
     }
 
     public function sapbill(Request $request){
@@ -281,7 +282,7 @@ class ApiDocController extends Controller
         $data = $stl_conn->table('BILLING_DATA')->where('CONTRACT_ACC', $user_cont_acc)->where('BILL_MONTH',$billmonth)->get();
         foreach ($data as $dat) {
         }
-        $path = base_path('temp/sapbills/'.$user_cont_acc.'.pdf');
+        $path = base_path('public/temp/sapbills/'.$user_cont_acc.'.pdf');
         $pdf = \PDF::loadView('pdf-layout.sap-bill', ['dat'=>$dat]);
         $pdf->save($path,$overwrite = true);
         return response()->json(['Info' => $data,'BillMonth'=>$billmonth,'Download' => $path]);

@@ -71,12 +71,31 @@
 				</div>
 
 				<div class="row">
+					<div class="col-md-12">
+						<div class="docs">
+							<div class="row">
+								<div class="col-xs-8"><h4><div class="content">Documents</div></h4></div>
+								{!! Form::open(array('route' => 'dashboard', 'method'=>'POST')) !!}
+								<div class="col-xs-2">{!! Form::select('month', $month, null,array('class' => 'form-control','id'=>'month','active')); !!}</div>
+								<div class="col-xs-2">{!! Form::select('year', $year, null,array('class' => 'form-control','id'=>'year','active')); !!}</div>
+								{!! Form::close() !!}
+								
+							</div>
+							
+							
+							<hr style="padding: 0px;">
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
 					<div class="col-md-6">
-						<a href="{{ url('/dashboard/offline-docs')}}" class="btn btn-default btn-block offline-docs">
+						<a href="{{ url('/dashboard/offline-docs') }}" class="btn btn-default btn-block offline-docs">
 							<span class="glyphicon glyphicon-file"></span>&nbsp;Offline Documents
 						</a>
 					</div>
-					<div class="col-md-6">
+				</div>
+					<!--<div class="col-md-6">
 						<div class="row">
 							<div class="col-md-6">
 								<a class="btn btn-lg btn-primary btn-block shcut" href="{{ url('/dashboard/feedbacks')}}">
@@ -89,22 +108,25 @@
 								</button>
 							</div>
 						</div>
-						<!--<div class="row">
+						<div class="row">
 							<div class="col-md-12">
 								<a class="btn btn-lg btn-danger btn-block shcut">
 								<span class="glyphicon glyphicon-phone"></span>&nbsp;Download App 
 								</a>
 							</div>
-						</div>-->
+						</div>
 																
 					
 											
 					
 											
-					</div>
+					</div>-->
 					
+					<div class="contactus">
+						
+					</div>
 
-				</div>
+				
 
 			</div>
 		</div>

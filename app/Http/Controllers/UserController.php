@@ -194,7 +194,9 @@ class UserController extends Controller
         else{
             return redirect()->route('login');
         }
-        return view('user.dashboard',['data' => $data]);
+        $year[]=['2016','2015','2014','2013'];
+        $month[]=['January','February','March','April','May','June','July','August','September','October','November','December'];
+        return view('user.dashboard',['data' => $data,'year'=>$year,'month'=>$month]);
     }
 
     public function settings(){
